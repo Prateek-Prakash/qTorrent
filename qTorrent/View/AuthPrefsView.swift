@@ -18,27 +18,27 @@ struct AuthPrefsView: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Text("Remote API")) {
-                    TextField("Base URL", text: $baseUrl)
+                Section {
+                    TextField("API Base URL", text: $baseUrl)
                         .modifier(TextFieldClearModifier(text: $baseUrl))
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                 }
                 
-                Section(header: Text("Remote Credentials")) {
-                    TextField("Username", text: $remoteUsername)
+                Section {
+                    TextField("Remmote Username", text: $remoteUsername)
                         .modifier(TextFieldClearModifier(text: $remoteUsername))
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                     
-                    SecureField("Password", text: $remotePassword)
+                    SecureField("Remote Password", text: $remotePassword)
                         .modifier(TextFieldClearModifier(text: $remotePassword))
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                 }
                 
-                Section(header: Text("Connection")) {
-                    Text("Status")
+                Section {
+                    Text("Connection Status")
                         .badge(Text(connectionStatus).foregroundColor(connectionColor))
                         
                 }
