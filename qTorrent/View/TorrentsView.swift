@@ -9,6 +9,11 @@ import SwiftUI
 
 struct TorrentsView: View {
     var body: some View {
-        Text("TorrentsView")
+        NavigationView {
+            ScrollView {
+                
+            }
+            .navigationTitle("Torrents")
+        }
     }
 }

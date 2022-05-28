@@ -12,8 +12,8 @@ struct AuthPrefsView: View {
     @AppStorage("remoteUsername") var remoteUsername = ""
     @AppStorage("remotePassword") var remotePassword = ""
     
-    var connectionStatus = "VALID"
-    var connectionColor = Color(.systemGreen)
+    var connectionStatus = "INVALID"
+    var connectionColor = Color(.systemRed)
     
     var body: some View {
         VStack {
@@ -35,12 +35,6 @@ struct AuthPrefsView: View {
                         .modifier(TextFieldClearModifier(text: $remotePassword))
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                }
-                
-                Section {
-                    Text("Connection Status")
-                        .badge(Text(connectionStatus).foregroundColor(connectionColor))
-                        
                 }
             }
         }
