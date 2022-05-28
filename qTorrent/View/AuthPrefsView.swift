@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AuthPrefsView: View {
-    @AppStorage("baseUrl") var baseUrl = ""
-    @AppStorage("remoteUsername") var remoteUsername = ""
-    @AppStorage("remotePassword") var remotePassword = ""
+    @AppStorage("baseUrl") private var baseUrl = ""
+    @AppStorage("remoteUsername") private var remoteUsername = ""
+    @AppStorage("remotePassword") private var remotePassword = ""
     
     var connectionStatus = "INVALID"
     var connectionColor = Color(.systemRed)
