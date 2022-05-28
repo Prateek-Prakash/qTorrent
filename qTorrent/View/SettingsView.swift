@@ -14,7 +14,12 @@ struct SettingsView: View {
         NavigationView {
             List {
                 Section(header: Text("Remote Client")) {
-                    Text("Authentication")
+                    NavigationLink(destination: DeferView {
+                        AuthPrefsView()
+                    }) {
+                        Text("Authentication")
+                    }
+                    
                     Text("Preferences")
                 }
                 
