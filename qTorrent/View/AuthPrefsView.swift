@@ -18,14 +18,14 @@ struct AuthPrefsView: View {
     var body: some View {
         VStack {
             List {
-                Section {
+                Section(header: Text("Remote API")) {
                     TextField("API Base URL", text: $baseUrl)
                         .modifier(TextFieldClearModifier(text: $baseUrl))
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                 }
                 
-                Section {
+                Section(header: Text("Remote Credentials")) {
                     TextField("Remmote Username", text: $remoteUsername)
                         .modifier(TextFieldClearModifier(text: $remoteUsername))
                         .autocapitalization(.none)
