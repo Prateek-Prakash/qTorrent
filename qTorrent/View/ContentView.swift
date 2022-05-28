@@ -32,8 +32,8 @@ struct ContentView: View {
         TabView {
             TorrentsView()
                 .tabItem {
-                    Image(systemName: "person.text.rectangle.fill")
-                    Text("Agents")
+                    Image(systemName: "tray.2.fill")
+                    Text("Torrents")
                 }
                 .environmentObject(torrentsData)
             
