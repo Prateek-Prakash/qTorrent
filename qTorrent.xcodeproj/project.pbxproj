@@ -10,6 +10,9 @@
 		6E2264C92842BD57005FB27F /* TorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2264C82842BD57005FB27F /* TorrentsView.swift */; };
 		6E2264CB2842BD62005FB27F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2264CA2842BD62005FB27F /* SettingsView.swift */; };
 		6E2264CD2842BD71005FB27F /* TorrentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2264CC2842BD71005FB27F /* TorrentsViewModel.swift */; };
+		6E2264CF2842C283005FB27F /* DeferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2264CE2842C283005FB27F /* DeferView.swift */; };
+		6E2264D12842C2A1005FB27F /* AppThemePrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2264D02842C2A1005FB27F /* AppThemePrefsView.swift */; };
+		6E2264D42842C2C2005FB27F /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2264D32842C2C2005FB27F /* AppTheme.swift */; };
 		6EB327B72842AACB003CA9E3 /* qTorrentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB327B62842AACB003CA9E3 /* qTorrentApp.swift */; };
 		6EB327B92842AACB003CA9E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB327B82842AACB003CA9E3 /* ContentView.swift */; };
 		6EB327BB2842AACB003CA9E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EB327BA2842AACB003CA9E3 /* Assets.xcassets */; };
@@ -20,6 +23,9 @@
 		6E2264C82842BD57005FB27F /* TorrentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsView.swift; sourceTree = "<group>"; };
 		6E2264CA2842BD62005FB27F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		6E2264CC2842BD71005FB27F /* TorrentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsViewModel.swift; sourceTree = "<group>"; };
+		6E2264CE2842C283005FB27F /* DeferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeferView.swift; sourceTree = "<group>"; };
+		6E2264D02842C2A1005FB27F /* AppThemePrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemePrefsView.swift; sourceTree = "<group>"; };
+		6E2264D32842C2C2005FB27F /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		6EB327B32842AACB003CA9E3 /* qTorrent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qTorrent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB327B62842AACB003CA9E3 /* qTorrentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qTorrentApp.swift; sourceTree = "<group>"; };
 		6EB327B82842AACB003CA9E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +52,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		6E2264D22842C2AD005FB27F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6E2264D32842C2C2005FB27F /* AppTheme.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		6EB327AA2842AACB003CA9E3 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +81,7 @@
 			children = (
 				6EB327BA2842AACB003CA9E3 /* Assets.xcassets */,
 				6EB327B62842AACB003CA9E3 /* qTorrentApp.swift */,
+				6E2264D22842C2AD005FB27F /* Common */,
 				6EB327C42842ABF6003CA9E3 /* View */,
 				6E2264C72842BD43005FB27F /* ViewModel */,
 				6EB327BC2842AACB003CA9E3 /* Preview Content */,
@@ -86,8 +101,10 @@
 			isa = PBXGroup;
 			children = (
 				6EB327B82842AACB003CA9E3 /* ContentView.swift */,
+				6E2264CE2842C283005FB27F /* DeferView.swift */,
 				6E2264C82842BD57005FB27F /* TorrentsView.swift */,
 				6E2264CA2842BD62005FB27F /* SettingsView.swift */,
+				6E2264D02842C2A1005FB27F /* AppThemePrefsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,10 +180,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EB327B92842AACB003CA9E3 /* ContentView.swift in Sources */,
+				6E2264D12842C2A1005FB27F /* AppThemePrefsView.swift in Sources */,
 				6E2264CB2842BD62005FB27F /* SettingsView.swift in Sources */,
 				6E2264CD2842BD71005FB27F /* TorrentsViewModel.swift in Sources */,
 				6E2264C92842BD57005FB27F /* TorrentsView.swift in Sources */,
+				6E2264D42842C2C2005FB27F /* AppTheme.swift in Sources */,
 				6EB327B72842AACB003CA9E3 /* qTorrentApp.swift in Sources */,
+				6E2264CF2842C283005FB27F /* DeferView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

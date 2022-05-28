@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct qTorrentApp: App {
+    @AppStorage("appTheme") var appTheme: AppTheme = .system
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(appTheme.colorScheme)
         }
     }
 }
