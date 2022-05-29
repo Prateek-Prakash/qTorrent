@@ -135,7 +135,7 @@ struct Torrent: Identifiable, Codable {
         case "metaDL", "allocating", "downloading", "forcedDL":
             return Color(.systemGreen)
         case "pausedUP", "pausedDL":
-            return nil
+            return Color(.systemGray)
         case "error", "missingFiles":
             return Color(.systemRed)
         case "unknown", "checkingResumeData", "moving":
