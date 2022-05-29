@@ -75,8 +75,8 @@
 		6E2264D22842C2AD005FB27F /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				6E2264D92842C579005FB27F /* TextFieldClearModifier.swift */,
 				6E2265012843D3F8005FB27F /* ColorfulIconLabelStyle.swift */,
+				6E2264D92842C579005FB27F /* TextFieldClearModifier.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
