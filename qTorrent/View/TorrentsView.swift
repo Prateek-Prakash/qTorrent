@@ -35,6 +35,8 @@ struct TorrentsView: View {
                                     Text(torrent.hash.uppercased())
                                         .font(.system(size: 10, weight: .thin))
                                         .foregroundColor(.secondary)
+                                    
+                                    ProgressView(value: torrent.progress, total: 1)
                                 }
                                 .padding(.vertical)
                                 
