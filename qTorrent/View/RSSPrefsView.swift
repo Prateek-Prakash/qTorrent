@@ -33,7 +33,7 @@ struct RSSPrefsView: View {
                 
                 Section(header: Text("RSS SMART EPISODE FILTER")) {
                     Toggle(isOn: $downloadRepackProperEpisodes) {
-                        Text("Download REPACK|PROPER EPISODES")
+                        Text("Download REPACK•PROPER Episodes")
                     }
                 }
             }
