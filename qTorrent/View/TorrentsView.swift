@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TorrentsView: View {
-    @State var torrentList: [TorrentInfo]? = []
-    @State var filterList: [TorrentInfo]? = []
+    @State var completeList: [Torrent]? = []
+    @State var filteredList: [Torrent]? = []
     
     @State private var searchQuery = ""
     
@@ -21,20 +21,20 @@ struct TorrentsView: View {
         NavigationView {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 10) {
-                    if let filterList = filterList {
-                        ForEach(filterList.indices, id: \.self) { torrentIndex in
-                            let torrentInfo = filterList[torrentIndex]
+                    if let torrents = filteredList {
+                        ForEach(torrents.indices, id: \.self) { torrentIndex in
+                            let torrent = torrents[torrentIndex]
                             HStack(alignment: .center) {
-                                Image(systemName: torrentInfo.getStateIcon())
+                                Image(systemName: torrent.getStateIcon())
                                     .font(.system(size: 15))
-                                    .foregroundColor(torrentInfo.getStateColor())
+                                    .foregroundColor(torrent.getStateColor())
                                     .padding()
                                 
                                 VStack(alignment: .leading, spacing: 3) {
-                                    Text(torrentInfo.name.uppercased())
+                                    Text(torrent.name.uppercased())
                                         .font(.system(size: 10, weight: .bold))
                                     
-                                    Text(torrentInfo.hash.uppercased())
+                                    Text(torrent.hash.uppercased())
                                         .font(.system(size: 10, weight: .thin))
                                         .foregroundColor(.secondary)
                                 }
@@ -61,9 +61,9 @@ struct TorrentsView: View {
             .disableAutocorrection(true)
             .onChange(of: searchQuery) { searchQuery in
                 if !searchQuery.isEmpty {
-                    self.executeSearch(searchQuery)
+                    executeSearch()
                 } else {
-                    self.clearSearch()
+                    clearSearch()
                 }
             }
             .navigationBarItems(leading: EditButton())
@@ -72,37 +72,39 @@ struct TorrentsView: View {
         }
         .onAppear {
             Task {
-                let getLogin = await TorrentService.shared.getLogin()
-                debugPrint("Login Successful: \(getLogin!)")
-                await self.getTorrentsInfo()
+                await fetchTorrents()
             }
         }
         .onReceive(refreshTimer) { currTime in
             Task {
-                await self.getTorrentsInfo()
+                await fetchTorrents()
             }
         }
     }
     
     // Functions
     
-    func getTorrentsInfo() async {
-        let torrentsInfo = await TorrentService.shared.getTorrentList()
+    func fetchTorrents() async {
+        let torrents = await TorrentService.shared.getTorrents()
         DispatchQueue.main.async {
-            self.torrentList = torrentsInfo
-            self.filterList = self.torrentList
+            completeList = torrents
+            if !searchQuery.isEmpty {
+                executeSearch()
+            } else {
+                filteredList = torrents
+            }
         }
     }
     
-    func executeSearch(_ searchQuery: String) {
+    func executeSearch() {
         DispatchQueue.main.async {
-            self.filterList = self.torrentList?.filter { $0.name.uppercased().contains(searchQuery.uppercased()) }
+            filteredList = completeList?.filter { $0.name.uppercased().contains(searchQuery.uppercased()) }
         }
     }
     
     func clearSearch() {
         DispatchQueue.main.async {
-            self.filterList = self.torrentList
+            filteredList = completeList
         }
     }
 }

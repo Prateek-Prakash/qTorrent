@@ -1,5 +1,5 @@
 //
-//  TorrentInfo.swift
+//  Torrent.swift
 //  qTorrent
 //
 //  Created by Prateek Prakash on 5/28/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TorrentInfo: Identifiable, Codable {
+struct Torrent: Identifiable, Codable {
     var id: String { hash }
     var addedOn: Int?
     var bytesLeft: Int?

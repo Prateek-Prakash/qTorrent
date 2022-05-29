@@ -17,7 +17,7 @@ class TorrentService {
     
     // Authentication
     
-    public func getLogin() async -> Bool? {
+    public func login() async -> Bool? {
         do {
             let params = [
                 "username": remoteUsername,
@@ -30,7 +30,7 @@ class TorrentService {
         }
     }
     
-    public func getLogout() async -> Bool? {
+    public func logout() async -> Bool? {
         do {
             let value = try await AF.request("\(baseUrl)/api/v2/auth/logout").serializingString().value
             return value.isEmpty
@@ -41,12 +41,12 @@ class TorrentService {
     
     // Torrents
     
-    public func getTorrentList() async -> [TorrentInfo]? {
+    public func getTorrents() async -> [Torrent]? {
         do {
             let params = [
                 "filter": "all"
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/torrents/info", parameters: params).serializingDecodable([TorrentInfo]?.self).value
+            let value = try await AF.request("\(baseUrl)/api/v2/torrents/info", parameters: params).serializingDecodable([Torrent]?.self).value
             return value
         } catch {
             return nil
