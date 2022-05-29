@@ -8,15 +8,44 @@
 import SwiftUI
 
 struct LogsPrefsView: View {
+    @State var completeList: [MainLog]? = []
+    @State var filteredList: [MainLog]? = []
+    
     @State var displayNormal = true
     @State var displayInfo = true
     @State var displayWarning = true
     @State var displayCritical = true
     
+    let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         VStack {
-            List {
-                
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 10) {
+                    if let logs = filteredList {
+                        ForEach(logs.indices, id: \.self) { logIndex in
+                            let log = logs[logIndex]
+                            HStack(alignment: .center, spacing: 0) {
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(String(log.getLogLevel()))
+                                        .font(.system(size: 10, weight: .thin))
+                                        .foregroundColor(log.getLogColor())
+                                    
+                                    Text(log.message!.uppercased())
+                                        .font(.system(size: 10, weight: .bold))
+                                    
+                                    Text(String(log.timestamp!))
+                                        .font(.system(size: 10, weight: .thin))
+                                        .foregroundColor(.secondary)
+                                }
+                                .padding(.horizontal)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.bottom)
             }
         }
         .navigationTitle("Logs")
@@ -61,6 +90,26 @@ struct LogsPrefsView: View {
             } label: {
                 Label("Filter", systemImage: "slider.horizontal.3")
             }
+        }
+        .onAppear {
+            Task {
+                await fetchMainLogs()
+            }
+        }
+        .onReceive(refreshTimer) { currTime in
+            Task {
+                await fetchMainLogs()
+            }
+        }
+    }
+    
+    // Functions
+    
+    func fetchMainLogs() async {
+        let mainLogs = await TorrentService.shared.getMainLogs()
+        DispatchQueue.main.async {
+            completeList = mainLogs
+            filteredList = mainLogs
         }
     }
 }

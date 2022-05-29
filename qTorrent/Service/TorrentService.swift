@@ -19,7 +19,7 @@ class TorrentService {
     
     public func login() async -> Bool? {
         do {
-            let params = [
+            let params: [String: Any] = [
                 "username": remoteUsername,
                 "password": remotePassword
             ]
@@ -43,7 +43,7 @@ class TorrentService {
     
     public func getTorrents() async -> [Torrent]? {
         do {
-            let params = [
+            let params: [String: Any] = [
                 "filter": "all"
             ]
             let value = try await AF.request("\(baseUrl)/api/v2/torrents/info", parameters: params).serializingDecodable([Torrent]?.self).value
@@ -55,7 +55,7 @@ class TorrentService {
     
     public func pause(_ hashes: [String]) async -> Bool? {
         do {
-            let params = [
+            let params: [String: Any] = [
                 "hashes": hashes.joined(separator: "|")
             ]
             let value = try await AF.request("\(baseUrl)/api/v2/torrents/pause", parameters: params).serializingString().value
@@ -67,7 +67,7 @@ class TorrentService {
     
     public func resume(_ hashes: [String]) async -> Bool? {
         do {
-            let params = [
+            let params: [String: Any] = [
                 "hashes": hashes.joined(separator: "|")
             ]
             let value = try await AF.request("\(baseUrl)/api/v2/torrents/resume", parameters: params).serializingString().value
@@ -79,7 +79,19 @@ class TorrentService {
     
     // Logs
     
-    public func getMainLogs() async -> Void {
-        
+    public func getMainLogs() async -> [MainLog]? {
+        do {
+            let params: [String: Any] = [
+                "normal": true,
+                "info": true,
+                "warning": true,
+                "critical": true,
+                "last_known_id": -1
+            ]
+            let value = try await AF.request("\(baseUrl)/api/v2/log/main", parameters: params).serializingDecodable([MainLog]?.self).value
+            return value
+        } catch {
+            return nil
+        }
     }
 }
