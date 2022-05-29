@@ -20,7 +20,11 @@ struct SettingsView: View {
                         Text("Authentication")
                     }
                     
-                    Text("Preferences")
+                    NavigationLink(destination: DeferView {
+                        ConfigPrefsView()
+                    }) {
+                        Text("Configuration")
+                    }
                 }
                 
                 Section(header: Text("Customization")) {

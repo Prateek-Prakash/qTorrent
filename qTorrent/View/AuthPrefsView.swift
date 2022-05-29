@@ -12,9 +12,6 @@ struct AuthPrefsView: View {
     @AppStorage("remoteUsername") private var remoteUsername = ""
     @AppStorage("remotePassword") private var remotePassword = ""
     
-    var connectionStatus = "INVALID"
-    var connectionColor = Color(.systemRed)
-    
     var body: some View {
         VStack {
             List {
