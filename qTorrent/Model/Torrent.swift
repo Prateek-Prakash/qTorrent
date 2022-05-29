@@ -105,12 +105,16 @@ struct Torrent: Identifiable, Codable {
     
     func getStateIcon() -> String {
         switch self.state {
-        case "uploading", "queuedUP", "stalledUP", "checkingUP", "forcedUP":
+        case "uploading", "forcedUP":
             return "arrow.up.circle"
-        case "downloading", "queuedDL", "stalledDL", "checkingDL", "forcedDL", "metaDL", "allocating":
+        case "queuedUP", "stalledUP", "checkingUP":
+            return "arrow.up.circle"
+        case "queuedDL", "stalledDL", "checkingDL":
+            return "arrow.down.circle"
+        case "metaDL", "allocating", "downloading", "forcedDL":
             return "arrow.down.circle"
         case "pausedUP", "pausedDL":
-            return "pause.circle"
+            return "arrow.up.circle"
         case "error", "missingFiles":
             return "exclamationmark.circle"
         case "unknown", "checkingResumeData", "moving":
@@ -129,9 +133,9 @@ struct Torrent: Identifiable, Codable {
         case "queuedDL", "stalledDL", "checkingDL":
             return Color(.systemYellow)
         case "metaDL", "allocating", "downloading", "forcedDL":
-            return Color(.systemBlue)
+            return Color(.systemGreen)
         case "pausedUP", "pausedDL":
-            return nil
+            return Color(.systemBlue)
         case "error", "missingFiles":
             return Color(.systemRed)
         case "unknown", "checkingResumeData", "moving":
