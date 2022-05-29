@@ -18,6 +18,8 @@ struct AdvancedPrefsView: View {
         VStack {
             List {
                 Section(header: Text("QBITTORRENT SECTION")) {
+                    Text("Save Resume Data Interval (Min)").badge("60")
+                    
                     Toggle(isOn: $recheckCompletedTorrents) {
                         Text("Recheck Completed Torrents")
                     }
