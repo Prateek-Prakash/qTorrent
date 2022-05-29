@@ -10,9 +10,10 @@ import SwiftUI
 struct TorrentsView: View {
     @EnvironmentObject var torrentsData: TorrentsViewModel
     
-    
     @State private var searchQuery = ""
     @State private var editMode = EditMode.inactive
+    
+    let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         NavigationView {
@@ -66,6 +67,18 @@ struct TorrentsView: View {
             .navigationBarItems(leading: EditButton())
             .environment(\.editMode, $editMode)
             .navigationTitle("Torrents")
+        }
+        .onAppear {
+            Task {
+                let getLogin = await TorrentService.shared.getLogin()
+                debugPrint("Login Successful: \(getLogin!)")
+                await torrentsData.getTorrentsInfo()
+            }
+        }
+        .onReceive(refreshTimer) { currTime in
+            Task {
+                await torrentsData.getTorrentsInfo()
+            }
         }
     }
 }

@@ -11,14 +11,6 @@ class TorrentsViewModel: ObservableObject {
     @Published var torrentList: [TorrentInfo]? = []
     @Published var filterList: [TorrentInfo]? = []
     
-    init() {
-        Task {
-            let getLogin = await TorrentService.shared.getLogin()
-            debugPrint("Login Successful: \(getLogin!)")
-            await getTorrentsInfo()
-        }
-    }
-    
     func getTorrentsInfo() async {
         let torrentsInfo = await TorrentService.shared.getTorrentList()
         DispatchQueue.main.async {
