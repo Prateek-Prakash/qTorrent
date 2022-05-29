@@ -144,4 +144,46 @@ struct Torrent: Identifiable, Codable {
             return nil
         }
     }
+    
+    func canPause() -> Bool? {
+        switch self.state {
+        case "uploading", "forcedUP":
+            return true
+        case "queuedUP", "stalledUP", "checkingUP":
+            return true
+        case "queuedDL", "stalledDL", "checkingDL":
+            return true
+        case "metaDL", "allocating", "downloading", "forcedDL":
+            return true
+        case "pausedUP", "pausedDL":
+            return false
+        case "error", "missingFiles":
+            return false
+        case "unknown", "checkingResumeData", "moving":
+            return false
+        default:
+            return nil
+        }
+    }
+    
+    func canResume() -> Bool? {
+        switch self.state {
+        case "uploading", "forcedUP":
+            return false
+        case "queuedUP", "stalledUP", "checkingUP":
+            return false
+        case "queuedDL", "stalledDL", "checkingDL":
+            return false
+        case "metaDL", "allocating", "downloading", "forcedDL":
+            return false
+        case "pausedUP", "pausedDL":
+            return true
+        case "error", "missingFiles":
+            return false
+        case "unknown", "checkingResumeData", "moving":
+            return false
+        default:
+            return nil
+        }
+    }
 }

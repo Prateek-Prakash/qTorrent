@@ -23,12 +23,26 @@ struct TorrentsView: View {
                         ForEach(torrents.indices, id: \.self) { torrentIndex in
                             let torrent = torrents[torrentIndex]
                             HStack(alignment: .center, spacing: 0) {
-                                Image(systemName: torrent.getStateIcon())
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 18, height: 18, alignment: .center)
-                                    .foregroundColor(torrent.getStateColor())
-                                    .padding()
+                                Button(action: {
+                                    let canPause = torrent.canPause()
+                                    let canResume = torrent.canResume()
+                                    if canPause != nil && canPause! {
+                                        Task {
+                                            await TorrentService.shared.pause([torrent.hash])
+                                        }
+                                    } else if canResume != nil && canResume! {
+                                        Task {
+                                            await TorrentService.shared.resume([torrent.hash])
+                                        }
+                                    }
+                                }) {
+                                    Image(systemName: torrent.getStateIcon())
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 18, height: 18, alignment: .center)
+                                        .foregroundColor(torrent.getStateColor())
+                                        .padding()
+                                }
                                 
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text(torrent.name.uppercased())
