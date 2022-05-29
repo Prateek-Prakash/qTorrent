@@ -6,7 +6,7 @@
 //
 
 struct TorrentInfo: Identifiable, Codable {
-    var id: String? { hash }
+    var id: String { hash }
     var addedOn: Int?
     var bytesLeft: Int?
     var isManagedByATM: Bool?
@@ -22,12 +22,12 @@ struct TorrentInfo: Identifiable, Codable {
     var etaSeconds: Int?
     var isFirstLastPrioritized: Bool?
     var isForceStart: Bool?
-    var hash: String?
+    var hash: String
     var lastActivity: Int?
     var magnetUri: String?
     var maxRatio: Int?
     var maxSeedingTime: Int?
-    var name: String?
+    var name: String
     var numComplete: Int?
     var numIncomplete: Int?
     var numLeechs : Int?

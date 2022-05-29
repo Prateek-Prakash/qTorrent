@@ -9,6 +9,8 @@ import SwiftUI
 
 class TorrentsViewModel: ObservableObject {
     @Published var torrentList: [TorrentInfo]? = []
+    @Published var filterList: [TorrentInfo]? = []
+    
     @Published var searchQuery = ""
     
     init() {
@@ -20,9 +22,22 @@ class TorrentsViewModel: ObservableObject {
     }
     
     func getTorrentsInfo() async {
-        let torrentList = await TorrentService.shared.getTorrentList()
+        let torrentsInfo = await TorrentService.shared.getTorrentList()
         DispatchQueue.main.async {
-            self.torrentList = torrentList
+            self.torrentList = torrentsInfo
+            self.filterList = self.torrentList
+        }
+    }
+    
+    func executeSearch() {
+        DispatchQueue.main.async {
+            self.filterList = self.torrentList?.filter { $0.name.uppercased().contains(self.searchQuery.uppercased()) }
+        }
+    }
+    
+    func clearSearch() {
+        DispatchQueue.main.async {
+            self.filterList = self.torrentList
         }
     }
 }

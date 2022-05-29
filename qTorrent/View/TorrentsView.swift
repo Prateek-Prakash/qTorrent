@@ -14,16 +14,18 @@ struct TorrentsView: View {
         NavigationView {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 10) {
-                    if let torrentList = torrentsData.torrentList {
-                        ForEach(torrentList.indices, id: \.self) { torrentIndex in
-                            let torrentInfo = torrentList[torrentIndex]
+                    if let filterList = torrentsData.filterList {
+                        ForEach(filterList.indices, id: \.self) { torrentIndex in
+                            let torrentInfo = filterList[torrentIndex]
                             HStack(alignment: .center) {
                                 VStack(alignment: .leading, spacing: 3.0) {
-                                    Text(torrentInfo.name!)
-                                        .font(.headline)
+                                    Text(torrentInfo.name.uppercased())
+                                        .font(.system(size: 10))
+                                        .fontWeight(.bold)
                                         .bold()
-                                    Text(torrentInfo.hash!)
-                                        .font(.subheadline)
+                                    Text(torrentInfo.hash.uppercased())
+                                        .font(.system(size: 10))
+                                        .fontWeight(.thin)
                                         .foregroundColor(.secondary)
                                 }
                                 .padding()
@@ -38,6 +40,15 @@ struct TorrentsView: View {
                 .padding(.bottom)
             }
             .searchable(text: $torrentsData.searchQuery, prompt: "Search")
+            .autocapitalization(.words)
+            .disableAutocorrection(true)
+            .onChange(of: torrentsData.searchQuery) { searchQuery in
+                if !searchQuery.isEmpty {
+                    torrentsData.executeSearch()
+                } else {
+                    torrentsData.clearSearch()
+                }
+            }
             .navigationTitle("Torrents")
         }
     }
