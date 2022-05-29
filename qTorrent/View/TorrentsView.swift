@@ -22,7 +22,12 @@ struct TorrentsView: View {
                         ForEach(filterList.indices, id: \.self) { torrentIndex in
                             let torrentInfo = filterList[torrentIndex]
                             HStack(alignment: .center) {
-                                VStack(alignment: .leading, spacing: 3.0) {
+                                Image(systemName: torrentInfo.getStateIcon())
+                                    .font(.system(size: 15))
+                                    .foregroundColor(torrentInfo.getStateColor())
+                                    .padding()
+                                
+                                VStack(alignment: .leading, spacing: 3) {
                                     Text(torrentInfo.name.uppercased())
                                         .font(.system(size: 10, weight: .bold))
                                     
@@ -30,7 +35,6 @@ struct TorrentsView: View {
                                         .font(.system(size: 10, weight: .thin))
                                         .foregroundColor(.secondary)
                                 }
-                                .padding(.leading)
                                 .padding(.vertical)
                                 
                                 Spacer()
@@ -38,7 +42,7 @@ struct TorrentsView: View {
                                 Image(systemName: "chevron.right")
                                     .font(.system(size: 10))
                                     .foregroundColor(.secondary)
-                                    .padding(.horizontal)
+                                    .padding()
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .background(Color(UIColor.secondarySystemBackground))

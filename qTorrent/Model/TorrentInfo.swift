@@ -5,6 +5,8 @@
 //  Created by Prateek Prakash on 5/28/22.
 //
 
+import SwiftUI
+
 struct TorrentInfo: Identifiable, Codable {
     var id: String { hash }
     var addedOn: Int?
@@ -42,7 +44,7 @@ struct TorrentInfo: Identifiable, Codable {
     var seenSomplete: Int?
     var isSequentialDownload: Bool?
     var selectedBytes: Int?
-    var state: String?
+    var state: String
     var isSuperSeeding: Bool?
     var tags: String?
     var timeActive: Int?
@@ -99,5 +101,41 @@ struct TorrentInfo: Identifiable, Codable {
         case uploaded = "uploaded"
         case uploadedSession = "uploaded_session"
         case upSpeed = "upspeed"
+    }
+    
+    func getStateIcon() -> String {
+        switch self.state {
+        case "uploading", "queuedUP", "stalledUP", "checkingUP", "forcedUP":
+            return "arrow.up.circle"
+        case "downloading", "queuedDL", "stalledDL", "checkingDL", "forcedDL", "metaDL", "allocating":
+            return "arrow.down.circle"
+        case "pausedUP", "pausedDL":
+            return "pause.circle"
+        case "error", "missingFiles":
+            return "exclamationmark.circle"
+        case "unknown", "checkingResumeData", "moving":
+            return "questionmark.circle"
+        default:
+            return "questionmark.circle"
+        }
+    }
+    
+    func getStateColor() -> Color? {
+        switch self.state {
+        case "uploading", "forcedUP", "downloading", "forcedDL":
+            return Color(.systemGreen)
+        case "queuedUP", "stalledUP", "checkingUP":
+            return Color(.systemYellow)
+        case "queuedDL", "stalledDL", "checkingDL", "metaDL", "allocating":
+            return Color(.systemYellow)
+        case "pausedUP", "pausedDL":
+            return Color(.systemBlue)
+        case "error", "missingFiles":
+            return Color(.systemRed)
+        case "unknown", "checkingResumeData", "moving":
+            return Color(.systemYellow)
+        default:
+            return nil
+        }
     }
 }
