@@ -26,12 +26,6 @@ struct ContentView: View {
         
         // Translucent TabBar
         UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance()
-        
-        // Attempt Login
-        Task {
-            let getLogin = await TorrentService.shared.getLogin()
-            debugPrint("Login Successful: \(getLogin!)")
-        }
     }
     
     var body: some View {

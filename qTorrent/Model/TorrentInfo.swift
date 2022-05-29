@@ -1,57 +1,57 @@
 //
-//  Torrent.swift
+//  TorrentInfo.swift
 //  qTorrent
 //
 //  Created by Prateek Prakash on 5/28/22.
 //
 
-struct Torrent: Identifiable, Codable {
-    var id: String { hash }
-    var addedOn: Int
-    var bytesLeft: Int
-    var isManagedByATM: Bool
-    var availability: Float
-    var category: String
-    var bytesCompleted: Int
-    var completionOn: Int
-    var contentPath: String
-    var dlLimit: Int
-    var dlSpeed: Int
-    var downloaded: Int
-    var downloadedSession: Int
-    var etaSeconds: Int
-    var isFirstLastPrioritized: Bool
-    var isForceStart: Bool
-    var hash: String
-    var lastActivity: Int
-    var magnetUri: Int
-    var maxRatio: Int
-    var maxSeedingTime: Int
-    var name: String
-    var numComplete: Int
-    var numIncomplete: Int
-    var numLeechs    : Int
-    var numSeeds: Int
-    var priority: Int
-    var progress: Float
-    var ratio: Float
-    var ratioLimit: Float
-    var savePath: String
-    var seedingTime: Int
-    var seedingTimeLimit : Int
-    var seenSomplete: Int
-    var isSequentialDownload: Bool
-    var selectedBytes: Int
-    var state: String
-    var isSuperSeeding: Bool
-    var tags: String
-    var timeActive: Int
-    var totalBytes: Int
-    var tracker: String
-    var upLimit: Int
-    var uploaded: Int
-    var uploadedSession: Int
-    var upSpeed: Int
+struct TorrentInfo: Identifiable, Codable {
+    var id: String? { hash }
+    var addedOn: Int?
+    var bytesLeft: Int?
+    var isManagedByATM: Bool?
+    var availability: Float?
+    var category: String?
+    var bytesCompleted: Int?
+    var completionOn: Int?
+    var contentPath: String?
+    var dlLimit: Int?
+    var dlSpeed: Int?
+    var downloaded: Int?
+    var downloadedSession: Int?
+    var etaSeconds: Int?
+    var isFirstLastPrioritized: Bool?
+    var isForceStart: Bool?
+    var hash: String?
+    var lastActivity: Int?
+    var magnetUri: String?
+    var maxRatio: Int?
+    var maxSeedingTime: Int?
+    var name: String?
+    var numComplete: Int?
+    var numIncomplete: Int?
+    var numLeechs : Int?
+    var numSeeds: Int?
+    var priority: Int?
+    var progress: Float?
+    var ratio: Float?
+    var ratioLimit: Float?
+    var savePath: String?
+    var seedingTime: Int?
+    var seedingTimeLimit: Int?
+    var seenSomplete: Int?
+    var isSequentialDownload: Bool?
+    var selectedBytes: Int?
+    var state: String?
+    var isSuperSeeding: Bool?
+    var tags: String?
+    var timeActive: Int?
+    var totalBytes: Int?
+    var tracker: String?
+    var upLimit: Int?
+    var uploaded: Int?
+    var uploadedSession: Int?
+    var upSpeed: Int?
     
     enum CodingKeys: String, CodingKey {
         case addedOn = "added_on"

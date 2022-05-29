@@ -41,12 +41,12 @@ class TorrentService {
     
     // Torrents
     
-    public func getTorrentList() async throws -> [Torrent]? {
+    public func getTorrentList() async -> [TorrentInfo]? {
         do {
             let params = [
                 "filter": "all"
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/torrents/info", parameters: params).serializingDecodable([Torrent]?.self).value
+            let value = try await AF.request("\(baseUrl)/api/v2/torrents/info", parameters: params).serializingDecodable([TorrentInfo]?.self).value
             return value
         } catch {
             return nil
