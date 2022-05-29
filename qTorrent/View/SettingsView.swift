@@ -13,7 +13,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Remote Client")) {
+                Section(header: Text("REMOTE CLIENT")) {
                     NavigationLink(destination: DeferView {
                         AuthPrefsView()
                     }) {
