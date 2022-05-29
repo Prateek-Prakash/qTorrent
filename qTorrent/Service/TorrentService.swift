@@ -52,4 +52,28 @@ class TorrentService {
             return nil
         }
     }
+    
+    public func pause(_ hashes: [String]) async -> Bool? {
+        do {
+            let params = [
+                "hashes": hashes.joined(separator: "|")
+            ]
+            let value = try await AF.request("\(baseUrl)/api/v2/torrents/pause", parameters: params).serializingString().value
+            return value.isEmpty
+        } catch {
+            return nil
+        }
+    }
+    
+    public func resume(_ hashes: [String]) async -> Bool? {
+        do {
+            let params = [
+                "hashes": hashes.joined(separator: "|")
+            ]
+            let value = try await AF.request("\(baseUrl)/api/v2/torrents/resume", parameters: params).serializingString().value
+            return value.isEmpty
+        } catch {
+            return nil
+        }
+    }
 }
