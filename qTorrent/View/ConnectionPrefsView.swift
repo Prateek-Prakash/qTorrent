@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct ConnectionPrefsView: View {
+    
+    
     var body: some View {
         VStack {
             List {
+                Section {
+                    Text("Peer Connection Protocol").badge("TCP & μTP")
+                }
                 
+                
+                Section(header: Text("LISTENTING PORT")) {
+                    Text("Incoming Port").badge("TCP & μTP")
+                }
             }
         }
         .navigationTitle("Connection")
