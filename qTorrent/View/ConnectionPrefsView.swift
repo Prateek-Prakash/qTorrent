@@ -19,7 +19,7 @@ struct ConnectionPrefsView: View {
                 
                 
                 Section(header: Text("LISTENTING PORT")) {
-                    Text("Incoming Port").badge("TCP & μTP")
+                    Text("Incoming Port").badge("54547")
                 }
             }
         }

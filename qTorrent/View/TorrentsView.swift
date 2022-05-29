@@ -22,9 +22,11 @@ struct TorrentsView: View {
                     if let torrents = filteredList {
                         ForEach(torrents.indices, id: \.self) { torrentIndex in
                             let torrent = torrents[torrentIndex]
-                            HStack(alignment: .center) {
+                            HStack(alignment: .center, spacing: 0) {
                                 Image(systemName: torrent.getStateIcon())
-                                    .font(.system(size: 15))
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 18, height: 18, alignment: .center)
                                     .foregroundColor(torrent.getStateColor())
                                     .padding()
                                 
