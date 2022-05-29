@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var torrentsData = TorrentsViewModel()
-    
     init() {
         // Rounded NavigationBar Title
         var titleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
@@ -35,7 +33,6 @@ struct ContentView: View {
                     Image(systemName: "tray.2.fill")
                     Text("Torrents")
                 }
-                .environmentObject(torrentsData)
             
             SettingsView()
                 .tabItem {

@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct TorrentsView: View {
-    @EnvironmentObject var torrentsData: TorrentsViewModel
+    @State var torrentList: [TorrentInfo]? = []
+    @State var filterList: [TorrentInfo]? = []
     
     @State private var searchQuery = ""
+    
     @State private var editMode = EditMode.inactive
     
     let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -19,7 +21,7 @@ struct TorrentsView: View {
         NavigationView {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 10) {
-                    if let filterList = torrentsData.filterList {
+                    if let filterList = filterList {
                         ForEach(filterList.indices, id: \.self) { torrentIndex in
                             let torrentInfo = filterList[torrentIndex]
                             HStack(alignment: .center) {
@@ -59,9 +61,9 @@ struct TorrentsView: View {
             .disableAutocorrection(true)
             .onChange(of: searchQuery) { searchQuery in
                 if !searchQuery.isEmpty {
-                    torrentsData.executeSearch(searchQuery)
+                    self.executeSearch(searchQuery)
                 } else {
-                    torrentsData.clearSearch()
+                    self.clearSearch()
                 }
             }
             .navigationBarItems(leading: EditButton())
@@ -72,13 +74,35 @@ struct TorrentsView: View {
             Task {
                 let getLogin = await TorrentService.shared.getLogin()
                 debugPrint("Login Successful: \(getLogin!)")
-                await torrentsData.getTorrentsInfo()
+                await self.getTorrentsInfo()
             }
         }
         .onReceive(refreshTimer) { currTime in
             Task {
-                await torrentsData.getTorrentsInfo()
+                await self.getTorrentsInfo()
             }
+        }
+    }
+    
+    // Functions
+    
+    func getTorrentsInfo() async {
+        let torrentsInfo = await TorrentService.shared.getTorrentList()
+        DispatchQueue.main.async {
+            self.torrentList = torrentsInfo
+            self.filterList = self.torrentList
+        }
+    }
+    
+    func executeSearch(_ searchQuery: String) {
+        DispatchQueue.main.async {
+            self.filterList = self.torrentList?.filter { $0.name.uppercased().contains(searchQuery.uppercased()) }
+        }
+    }
+    
+    func clearSearch() {
+        DispatchQueue.main.async {
+            self.filterList = self.torrentList
         }
     }
 }
