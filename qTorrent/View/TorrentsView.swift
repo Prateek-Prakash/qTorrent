@@ -10,6 +10,10 @@ import SwiftUI
 struct TorrentsView: View {
     @EnvironmentObject var torrentsData: TorrentsViewModel
     
+    
+    @State private var searchQuery = ""
+    @State private var editMode = EditMode.inactive
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -20,15 +24,21 @@ struct TorrentsView: View {
                             HStack(alignment: .center) {
                                 VStack(alignment: .leading, spacing: 3.0) {
                                     Text(torrentInfo.name.uppercased())
-                                        .font(.system(size: 10))
-                                        .fontWeight(.bold)
-                                        .bold()
+                                        .font(.system(size: 10, weight: .bold))
+                                    
                                     Text(torrentInfo.hash.uppercased())
-                                        .font(.system(size: 10))
-                                        .fontWeight(.thin)
+                                        .font(.system(size: 10, weight: .thin))
                                         .foregroundColor(.secondary)
                                 }
-                                .padding()
+                                .padding(.leading)
+                                .padding(.vertical)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.secondary)
+                                    .padding(.horizontal)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .background(Color(UIColor.secondarySystemBackground))
@@ -39,16 +49,18 @@ struct TorrentsView: View {
                 .padding(.horizontal)
                 .padding(.bottom)
             }
-            .searchable(text: $torrentsData.searchQuery, prompt: "Search")
+            .searchable(text: $searchQuery, prompt: "Search")
             .autocapitalization(.words)
             .disableAutocorrection(true)
-            .onChange(of: torrentsData.searchQuery) { searchQuery in
+            .onChange(of: searchQuery) { searchQuery in
                 if !searchQuery.isEmpty {
-                    torrentsData.executeSearch()
+                    torrentsData.executeSearch(searchQuery)
                 } else {
                     torrentsData.clearSearch()
                 }
             }
+            .navigationBarItems(leading: EditButton())
+            .environment(\.editMode, $editMode)
             .navigationTitle("Torrents")
         }
     }

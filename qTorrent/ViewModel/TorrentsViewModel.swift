@@ -11,8 +11,6 @@ class TorrentsViewModel: ObservableObject {
     @Published var torrentList: [TorrentInfo]? = []
     @Published var filterList: [TorrentInfo]? = []
     
-    @Published var searchQuery = ""
-    
     init() {
         Task {
             let getLogin = await TorrentService.shared.getLogin()
@@ -29,9 +27,9 @@ class TorrentsViewModel: ObservableObject {
         }
     }
     
-    func executeSearch() {
+    func executeSearch(_ searchQuery: String) {
         DispatchQueue.main.async {
-            self.filterList = self.torrentList?.filter { $0.name.uppercased().contains(self.searchQuery.uppercased()) }
+            self.filterList = self.torrentList?.filter { $0.name.uppercased().contains(searchQuery.uppercased()) }
         }
     }
     
