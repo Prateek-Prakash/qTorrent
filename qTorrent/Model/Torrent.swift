@@ -122,18 +122,20 @@ struct Torrent: Identifiable, Codable {
     
     func getStateColor() -> Color? {
         switch self.state {
-        case "uploading", "forcedUP", "downloading", "forcedDL":
+        case "uploading", "forcedUP":
             return Color(.systemGreen)
         case "queuedUP", "stalledUP", "checkingUP":
             return Color(.systemYellow)
-        case "queuedDL", "stalledDL", "checkingDL", "metaDL", "allocating":
+        case "queuedDL", "stalledDL", "checkingDL":
             return Color(.systemYellow)
-        case "pausedUP", "pausedDL":
+        case "metaDL", "allocating", "downloading", "forcedDL":
             return Color(.systemBlue)
+        case "pausedUP", "pausedDL":
+            return nil
         case "error", "missingFiles":
             return Color(.systemRed)
         case "unknown", "checkingResumeData", "moving":
-            return Color(.systemYellow)
+            return nil
         default:
             return nil
         }
