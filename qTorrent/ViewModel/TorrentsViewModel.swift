@@ -9,6 +9,7 @@ import SwiftUI
 
 class TorrentsViewModel: ObservableObject {
     @Published var torrentList: [TorrentInfo]? = []
+    @Published var searchQuery = ""
     
     init() {
         Task {

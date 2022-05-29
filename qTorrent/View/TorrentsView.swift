@@ -37,6 +37,7 @@ struct TorrentsView: View {
                 .padding(.horizontal)
                 .padding(.bottom)
             }
+            .searchable(text: $torrentsData.searchQuery, prompt: "Search")
             .navigationTitle("Torrents")
         }
     }
