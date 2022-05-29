@@ -21,6 +21,12 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink(destination: DeferView {
+                        LogsPrefsView()
+                    }) {
+                        Label("Logs", systemImage: "doc.text.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemOrange), size: 1))
+                    }
+                    
+                    NavigationLink(destination: DeferView {
                         ConfigPrefsView()
                     }) {
                         Label("Configuration", systemImage: "gearshape.2.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemGray), size: 1))

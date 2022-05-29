@@ -14,6 +14,7 @@ struct ColorfulIconLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         Label {
             configuration.title
+                .padding(.leading, 5)
         } icon: {
             configuration.icon
                 .imageScale(.medium)
