@@ -13,8 +13,6 @@ struct TorrentsView: View {
     
     @State private var searchQuery = ""
     
-    @State private var editMode = EditMode.inactive
-    
     let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -66,8 +64,6 @@ struct TorrentsView: View {
                     clearSearch()
                 }
             }
-            .navigationBarItems(leading: EditButton())
-            .environment(\.editMode, $editMode)
             .navigationTitle("Torrents")
         }
         .onAppear {
