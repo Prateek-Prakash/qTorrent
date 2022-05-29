@@ -11,6 +11,7 @@ struct TorrentsView: View {
     @State var completeList: [Torrent]? = []
     @State var filteredList: [Torrent]? = []
     
+    @State private var selectedState: Int = 1
     @State private var searchQuery = ""
     
     let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -83,6 +84,38 @@ struct TorrentsView: View {
                 }
             }
             .navigationTitle("Torrents")
+            .toolbar {
+                Menu {
+                    Picker(selection: $selectedState, label: Text("Sorting options")) {
+                        HStack {
+                            Text("All")
+                            Image(systemName: "circle.hexagongrid")
+                        }.tag(1)
+                        
+                        HStack {
+                            Text("Downloading")
+                            Image(systemName: "arrow.down")
+                        }.tag(2)
+                        
+                        HStack {
+                            Text("Seeding")
+                            Image(systemName: "arrow.up")
+                        }.tag(3)
+                        
+                        HStack {
+                            Text("Paused")
+                            Image(systemName: "pause")
+                        }.tag(4)
+                        
+                        HStack {
+                            Text("Errored")
+                            Image(systemName: "exclamationmark")
+                        }.tag(5)
+                    }
+                } label: {
+                    Label("Filter", systemImage: "slider.horizontal.3")
+                }
+            }
         }
         .onAppear {
             Task {

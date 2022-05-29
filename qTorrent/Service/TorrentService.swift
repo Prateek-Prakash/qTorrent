@@ -76,4 +76,10 @@ class TorrentService {
             return nil
         }
     }
+    
+    // Logs
+    
+    public func getMainLogs() async -> Void {
+        
+    }
 }
