@@ -17,13 +17,13 @@ struct SettingsView: View {
                     NavigationLink(destination: DeferView {
                         AuthPrefsView()
                     }) {
-                        Text("Authentication")
+                        Label("Authentication", systemImage: "lock.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemPink), size: 1))
                     }
                     
                     NavigationLink(destination: DeferView {
                         ConfigPrefsView()
                     }) {
-                        Text("Configuration")
+                        Label("Configuration", systemImage: "gearshape.2.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemGray), size: 1))
                     }
                 }
                 
@@ -31,7 +31,7 @@ struct SettingsView: View {
                     NavigationLink(destination: DeferView {
                         AppThemePrefsView()
                     }) {
-                        Text("App Theme")
+                        Label("App Theme", systemImage: "paintbrush.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemIndigo), size: 1))
                             .badge(Text(appTheme.rawValue))
                     }
                 }
