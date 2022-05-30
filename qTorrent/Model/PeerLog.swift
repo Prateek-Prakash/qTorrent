@@ -9,10 +9,10 @@ import SwiftUI
 
 struct PeerLog: Identifiable, Codable {
     var id: Int
-    var ip: String?
-    var timestamp: Int?
-    var blocked: Bool?
-    var reason: String?
+    var ip: String
+    var timestamp: Int
+    var blocked: Bool
+    var reason: String
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -28,13 +28,11 @@ struct PeerLog: Identifiable, Codable {
             return Color(.systemRed)
         case false:
             return Color(.systemGreen)
-        default:
-            return nil
         }
     }
     
     func getDate() -> String {
-        let epochTime = TimeInterval(timestamp!) / 1000
+        let epochTime = TimeInterval(timestamp) / 1000
         let currDate = Date(timeIntervalSince1970: epochTime)
         let dateFormet = DateFormatter()
         dateFormet.dateFormat = "MM-dd-YYYY @ hh:mm:ss.SSS a"

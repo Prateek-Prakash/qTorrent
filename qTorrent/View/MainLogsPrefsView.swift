@@ -11,7 +11,7 @@ struct MainLogsPrefsView: View {
     @State var completeList: [MainLog]? = []
     @State var filteredList: [MainLog]? = []
     
-    @State var displayeTypes = [ 1, 2, 3, 8 ]
+    @State var displayTypes = [ 1, 2, 3, 8 ]
     
     let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -22,14 +22,14 @@ struct MainLogsPrefsView: View {
                     if let logs = filteredList {
                         ForEach(logs.indices, id: \.self) { logIndex in
                             let log = logs[logIndex]
-                            if displayeTypes.contains(log.type!) {
+                            if displayTypes.contains(log.type) {
                                 HStack(alignment: .center, spacing: 0) {
                                     VStack(alignment: .leading, spacing: 3) {
                                         Text(String(log.getLogLevel()))
                                             .font(.system(size: 10, weight: .thin))
                                             .foregroundColor(log.getLogColor())
                                         
-                                        Text(log.message!.uppercased())
+                                        Text(log.message.uppercased())
                                             .font(.system(size: 10, weight: .bold))
                                         
                                         Text(String(log.getDate()))
@@ -52,53 +52,53 @@ struct MainLogsPrefsView: View {
         .toolbar {
             Menu {
                 Button {
-                    if displayeTypes.contains(1) {
-                        displayeTypes.remove(at: displayeTypes.firstIndex(of: 1)!)
+                    if displayTypes.contains(1) {
+                        displayTypes.remove(at: displayTypes.firstIndex(of: 1)!)
                     } else {
-                        displayeTypes.append(1)
+                        displayTypes.append(1)
                     }
                 } label: {
                     Text("Normal").tag(1)
-                    if displayeTypes.contains(1) {
+                    if displayTypes.contains(1) {
                         Image(systemName: "checkmark")
                     }
                 }
                 
                 Button {
-                    if displayeTypes.contains(2) {
-                        displayeTypes.remove(at: displayeTypes.firstIndex(of: 2)!)
+                    if displayTypes.contains(2) {
+                        displayTypes.remove(at: displayTypes.firstIndex(of: 2)!)
                     } else {
-                        displayeTypes.append(2)
+                        displayTypes.append(2)
                     }
                 } label: {
                     Text("Info").tag(2)
-                    if displayeTypes.contains(2) {
+                    if displayTypes.contains(2) {
                         Image(systemName: "checkmark")
                     }
                 }
                 
                 Button {
-                    if displayeTypes.contains(3) {
-                        displayeTypes.remove(at: displayeTypes.firstIndex(of: 3)!)
+                    if displayTypes.contains(3) {
+                        displayTypes.remove(at: displayTypes.firstIndex(of: 3)!)
                     } else {
-                        displayeTypes.append(3)
+                        displayTypes.append(3)
                     }
                 } label: {
                     Text("Warning").tag(3)
-                    if displayeTypes.contains(3) {
+                    if displayTypes.contains(3) {
                         Image(systemName: "checkmark")
                     }
                 }
                 
                 Button {
-                    if displayeTypes.contains(8) {
-                        displayeTypes.remove(at: displayeTypes.firstIndex(of: 8)!)
+                    if displayTypes.contains(8) {
+                        displayTypes.remove(at: displayTypes.firstIndex(of: 8)!)
                     } else {
-                        displayeTypes.append(8)
+                        displayTypes.append(8)
                     }
                 } label: {
                     Text("Critical").tag(8)
-                    if displayeTypes.contains(8) {
+                    if displayTypes.contains(8) {
                         Image(systemName: "checkmark")
                     }
                 }

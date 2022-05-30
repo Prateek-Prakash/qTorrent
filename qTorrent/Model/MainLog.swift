@@ -9,9 +9,9 @@ import SwiftUI
 
 struct MainLog: Identifiable, Codable {
     var id: Int
-    var message: String?
-    var timestamp: Int?
-    var type: Int?
+    var message: String
+    var timestamp: Int
+    var type: Int
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -51,7 +51,7 @@ struct MainLog: Identifiable, Codable {
     }
     
     func getDate() -> String {
-        let epochTime = TimeInterval(timestamp!) / 1000
+        let epochTime = TimeInterval(timestamp) / 1000
         let currDate = Date(timeIntervalSince1970: epochTime)
         let dateFormet = DateFormatter()
         dateFormet.dateFormat = "MM-dd-YYYY @ hh:mm:ss.SSS a"

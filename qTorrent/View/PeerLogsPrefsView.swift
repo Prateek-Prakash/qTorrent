@@ -21,7 +21,7 @@ struct PeerLogsPrefsView: View {
                             let log = logs[logIndex]
                             HStack(alignment: .center, spacing: 0) {
                                 VStack(alignment: .leading, spacing: 3) {
-                                    Text(log.ip!.uppercased())
+                                    Text(log.ip.uppercased())
                                         .font(.system(size: 10, weight: .bold))
                                         .foregroundColor(log.getLogColor())
                                     

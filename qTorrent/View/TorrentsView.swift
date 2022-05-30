@@ -16,6 +16,28 @@ struct TorrentsView: View {
     
     let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
+    @State var displayStates = [
+        "error",
+        "missingFiles",
+        "uploading",
+        "pausedUP",
+        "queuedUP",
+        "stalledUP",
+        "checkingUP",
+        "forcedUP",
+        "allocating",
+        "downloading",
+        "metaDL",
+        "pausedDL",
+        "queuedDL",
+        "stalledDL",
+        "checkingDL",
+        "forcedDL",
+        "checkingResumeData",
+        "moving",
+        "unknown"
+    ]
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -23,50 +45,52 @@ struct TorrentsView: View {
                     if let torrents = filteredList {
                         ForEach(torrents.indices, id: \.self) { torrentIndex in
                             let torrent = torrents[torrentIndex]
-                            HStack(alignment: .center, spacing: 0) {
-                                Button(action: {
-                                    let canPause = torrent.canPause()
-                                    let canResume = torrent.canResume()
-                                    if canPause != nil && canPause! {
-                                        Task {
-                                            await TorrentService.shared.pause([torrent.hash])
+                            if displayStates.contains(torrent.state) {
+                                HStack(alignment: .center, spacing: 0) {
+                                    Button(action: {
+                                        let canPause = torrent.canPause()
+                                        let canResume = torrent.canResume()
+                                        if canPause != nil && canPause! {
+                                            Task {
+                                                await TorrentService.shared.pause([torrent.hash])
+                                            }
+                                        } else if canResume != nil && canResume! {
+                                            Task {
+                                                await TorrentService.shared.resume([torrent.hash])
+                                            }
                                         }
-                                    } else if canResume != nil && canResume! {
-                                        Task {
-                                            await TorrentService.shared.resume([torrent.hash])
-                                        }
+                                    }) {
+                                        Image(systemName: torrent.getStateIcon())
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 18, height: 18, alignment: .center)
+                                            .foregroundColor(torrent.getStateColor())
+                                            .padding()
                                     }
-                                }) {
-                                    Image(systemName: torrent.getStateIcon())
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 18, height: 18, alignment: .center)
-                                        .foregroundColor(torrent.getStateColor())
+                                    
+                                    VStack(alignment: .leading, spacing: 3) {
+                                        Text(torrent.name.uppercased())
+                                            .font(.system(size: 10, weight: .bold))
+                                        
+                                        Text(torrent.hash.uppercased())
+                                            .font(.system(size: 10, weight: .thin))
+                                            .foregroundColor(.secondary)
+                                        
+                                        ProgressView(value: torrent.progress, total: 1)
+                                    }
+                                    .padding(.vertical)
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .font(.system(size: 10))
+                                        .foregroundColor(.secondary)
                                         .padding()
                                 }
-                                
-                                VStack(alignment: .leading, spacing: 3) {
-                                    Text(torrent.name.uppercased())
-                                        .font(.system(size: 10, weight: .bold))
-                                    
-                                    Text(torrent.hash.uppercased())
-                                        .font(.system(size: 10, weight: .thin))
-                                        .foregroundColor(.secondary)
-                                    
-                                    ProgressView(value: torrent.progress, total: 1)
-                                }
-                                .padding(.vertical)
-                                
-                                Spacer()
-                                
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 10))
-                                    .foregroundColor(.secondary)
-                                    .padding()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(Color(UIColor.secondarySystemBackground))
+                                .cornerRadius(5)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color(UIColor.secondarySystemBackground))
-                            .cornerRadius(5)
                         }
                     }
                 }
@@ -108,9 +132,17 @@ struct TorrentsView: View {
                         }.tag(4)
                         
                         HStack {
+                            Text("Unknown")
+                            Image(systemName: "questionmark")
+                        }.tag(5)
+                        
+                        HStack {
                             Text("Errored")
                             Image(systemName: "exclamationmark")
                         }.tag(5)
+                    }
+                    .onChange(of: selectedState) { selectedTag in
+                        updateDisplayStates()
                     }
                 } label: {
                     Label("Filter", systemImage: "slider.horizontal.3")
@@ -152,6 +184,69 @@ struct TorrentsView: View {
     func clearSearch() {
         DispatchQueue.main.async {
             filteredList = completeList
+        }
+    }
+    
+    func updateDisplayStates() {
+        switch selectedState {
+        case 1:
+            displayStates = [
+                "error",
+                "missingFiles",
+                "uploading",
+                "pausedUP",
+                "queuedUP",
+                "stalledUP",
+                "checkingUP",
+                "forcedUP",
+                "allocating",
+                "downloading",
+                "metaDL",
+                "pausedDL",
+                "queuedDL",
+                "stalledDL",
+                "checkingDL",
+                "forcedDL",
+                "checkingResumeData",
+                "moving",
+                "unknown"
+            ]
+        case 2:
+            displayStates = [
+                "allocating",
+                "downloading",
+                "metaDL",
+                "queuedDL",
+                "stalledDL",
+                "checkingDL",
+                "forcedDL"
+            ]
+        case 3:
+            displayStates = [
+                "uploading",
+                "queuedUP",
+                "stalledUP",
+                "checkingUP",
+                "forcedUP"
+            ]
+        case 4:
+            displayStates = [
+                "pausedUP",
+                "pausedDL"
+            ]
+        case 5:
+            displayStates = [
+                "checkingResumeData",
+                "moving",
+                "unknown"
+            ]
+        case 6:
+            displayStates = [
+                "error",
+                "missingFiles"
+            ]
+        default:
+            break
         }
     }
 }
