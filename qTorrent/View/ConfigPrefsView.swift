@@ -11,7 +11,7 @@ struct ConfigPrefsView: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Text("OPTIONS CATEGORIES")) {
+                Section(header: Text("CATEGORIES")) {
                     NavigationLink(destination: DeferView {
                         DownloadsPrefsView()
                     }) {

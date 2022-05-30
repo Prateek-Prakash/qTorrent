@@ -94,4 +94,16 @@ class TorrentService {
             return nil
         }
     }
+    
+    public func getPeerLogs() async -> [PeerLog]? {
+        do {
+            let params: [String: Any] = [
+                "last_known_id": -1
+            ]
+            let value = try await AF.request("\(baseUrl)/api/v2/log/peers", parameters: params).serializingDecodable([PeerLog]?.self).value
+            return value
+        } catch {
+            return nil
+        }
+    }
 }
