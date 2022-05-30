@@ -49,4 +49,12 @@ struct MainLog: Identifiable, Codable {
             return Color(.systemGray)
         }
     }
+    
+    func getDate() -> String {
+        let epochTime = TimeInterval(timestamp!) / 1000
+        let currDate = Date(timeIntervalSince1970: epochTime)
+        let dateFormet = DateFormatter()
+        dateFormet.dateFormat = "MM-dd-YYYY @ hh:mm:ss.SSS a"
+        return dateFormet.string(from: currDate)
+    }
 }

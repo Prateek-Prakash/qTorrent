@@ -34,8 +34,8 @@ struct LogsPrefsView: View {
                                     Text(log.message!.uppercased())
                                         .font(.system(size: 10, weight: .bold))
                                     
-                                    Text(String(log.timestamp!))
-                                        .font(.system(size: 10, weight: .thin))
+                                    Text(String(log.getDate()))
+                                        .font(.system(size: 10, weight: .bold))
                                         .foregroundColor(.secondary)
                                 }
                                 .padding(.horizontal)
