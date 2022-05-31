@@ -79,20 +79,23 @@ struct TorrentsView: View {
                                         ProgressView(value: torrent.progress, total: 1)
                                         
                                         HStack {
-                                            Image(systemName: "arrowtriangle.down.fill")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 8, height: 8, alignment: .center)
-                                            Text("\(torrent.dlSpeed) B/s")
-                                                .font(.system(size: 10))
-                                            Spacer()
-                                            Image(systemName: "arrowtriangle.up.fill")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 8, height: 8, alignment: .center)
-                                            Text("\(torrent.upSpeed) B/s")
-                                                .font(.system(size: 10))
-                                            Spacer()
+                                            HStack {
+                                                Image(systemName: "arrowtriangle.down.fill")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 8, height: 8, alignment: .center)
+                                                Text("\(torrent.dlSpeed) B/s")
+                                                    .font(.system(size: 10))
+                                            }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                            
+                                            HStack {
+                                                Image(systemName: "arrowtriangle.up.fill")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 8, height: 8, alignment: .center)
+                                                Text("\(torrent.upSpeed) B/s")
+                                                    .font(.system(size: 10))
+                                            }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                         }
                                     }
                                     .padding(.vertical)
