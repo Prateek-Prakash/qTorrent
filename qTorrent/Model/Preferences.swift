@@ -13,8 +13,8 @@ struct Preferences: Identifiable, Codable {
     var isCreateSubfolderEnabled: Bool?
     var isStartPausedEnabled: Bool
     var autoDeleteMode: Int
-    var isPreallocateAll: Bool?
-    var isIncompleteFilesExt: Bool?
+    var isPreallocateAll: Bool
+    var isIncompleteFilesExt: Bool
     var isAutoTMNEnabled: Bool?
     var isTorrentChangedTMNEnabled: Bool?
     var isSavePathChangedTMNEnabled: Bool?
@@ -58,9 +58,9 @@ struct Preferences: Identifiable, Codable {
     var stopTrackerTimeout: Int?
     var isPieceExtentAffinityEnabled: Bool?
     var bittorrentProtocol: Int?
-    var isLimitUTPRate: Bool?
-    var isLimitTCPOverhead: Bool?
-    var isLimitLANPeers: Bool?
+    var isLimitUTPRate: Bool
+    var isLimitTCPOverhead: Bool
+    var isLimitLANPeers: Bool
     var altALLimit: Int?
     var altUPLimit: Int?
     var isSchedulerEnabled: Bool?
