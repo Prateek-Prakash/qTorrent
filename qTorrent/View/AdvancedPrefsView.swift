@@ -14,6 +14,8 @@ struct AdvancedPrefsView: View {
     @State var embeddedTracker = false
     @State var enableOSCache = true
     @State var coalesceReadsWrites = true
+    @State var usePieceExtentAffinity = false
+    @State var sendUploadPieceSuggestions = false
     
     var body: some View {
         VStack {
@@ -120,6 +122,36 @@ struct AdvancedPrefsView: View {
                             await fetchPreferences()
                         }
                     }
+                    
+                    Toggle(isOn: $usePieceExtentAffinity) {
+                        Text("Use Piece Extent Affinity")
+                    }
+                    .onChange(of: usePieceExtentAffinity) { newBool in
+                        let prefs = [
+                            "enable_piece_extent_affinity": newBool
+                        ]
+                        let json = try? JSONSerialization.data(withJSONObject: prefs)
+                        let string = String(data: json!, encoding: String.Encoding.ascii)
+                        Task {
+                            await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
+                        }
+                    }
+                    
+                    Toggle(isOn: $sendUploadPieceSuggestions) {
+                        Text("Send Upload Piece Suggestions")
+                    }
+                    .onChange(of: sendUploadPieceSuggestions) { newBool in
+                        let prefs = [
+                            "enable_upload_suggestions": newBool
+                        ]
+                        let json = try? JSONSerialization.data(withJSONObject: prefs)
+                        let string = String(data: json!, encoding: String.Encoding.ascii)
+                        Task {
+                            await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
+                        }
+                    }
                 }
             }
         }
@@ -142,5 +174,7 @@ struct AdvancedPrefsView: View {
         embeddedTracker = preferences!.isEnableEmbeddedTracker
         enableOSCache = preferences!.isEnableOSCache
         coalesceReadsWrites = preferences!.isEnableCoalesceReadWrite
+        usePieceExtentAffinity = preferences!.isEnablePieceExtentAffinity
+        sendUploadPieceSuggestions = preferences!.isEnableUploadSuggestions
     }
 }

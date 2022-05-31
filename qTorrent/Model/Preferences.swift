@@ -56,7 +56,7 @@ struct Preferences: Identifiable, Codable {
     var maxUploads: Int?
     var maxUploadsPerTorrent: Int?
     var stopTrackerTimeout: Int?
-    var isPieceExtentAffinityEnabled: Bool?
+    var isEnablePieceExtentAffinity: Bool
     var bittorrentProtocol: Int?
     var isLimitUTPRate: Bool
     var isLimitTCPOverhead: Bool
@@ -140,7 +140,7 @@ struct Preferences: Identifiable, Codable {
     var isEnableEmbeddedTracker: Bool
     var isEnableMultiConnectionsFromSameIP: Bool?
     var isEnableOSCache: Bool
-    var isEnableUploadSuggestions: Bool?
+    var isEnableUploadSuggestions: Bool
     var filePoolSize: Int?
     var outgoingPortsMax: Int?
     var outgoingPortsMin: Int?
@@ -205,7 +205,7 @@ struct Preferences: Identifiable, Codable {
         case maxUploads = "max_uploads"
         case maxUploadsPerTorrent = "max_uploads_per_torrent"
         case stopTrackerTimeout = "stop_tracker_timeout"
-        case isPieceExtentAffinityEnabled = "enable_piece_extent_affinity"
+        case isEnablePieceExtentAffinity = "enable_piece_extent_affinity"
         case bittorrentProtocol = "bittorrent_protocol"
         case isLimitUTPRate = "limit_utp_rate"
         case isLimitTCPOverhead = "limit_tcp_overhead"
