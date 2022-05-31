@@ -28,6 +28,7 @@ struct BitTorrentPrefsView: View {
                         let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
                             await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
                         }
                     }
                     
@@ -42,6 +43,7 @@ struct BitTorrentPrefsView: View {
                         let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
                             await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
                         }
                     }
                     
@@ -56,6 +58,7 @@ struct BitTorrentPrefsView: View {
                         let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
                             await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
                         }
                     }
                     
@@ -70,6 +73,7 @@ struct BitTorrentPrefsView: View {
                         let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
                             await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
                         }
                     }
                 }

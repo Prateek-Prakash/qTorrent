@@ -26,6 +26,7 @@ struct DownloadsPrefsView: View {
                         let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
                             await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
                         }
                     }
                     
@@ -40,6 +41,7 @@ struct DownloadsPrefsView: View {
                         let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
                             await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
                         }
                     }
                 }
