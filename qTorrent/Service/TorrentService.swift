@@ -117,4 +117,16 @@ class TorrentService {
             return nil
         }
     }
+    
+    public func setPreferences(_ json: String) async -> Bool? {
+        do {
+            let params: [String: Any] = [
+                "json": json
+            ]
+            let value = try await AF.request("\(baseUrl)/api/v2/app/setPreferences", parameters: params).serializingString().value
+            return value.isEmpty
+        } catch {
+            return nil
+        }
+    }
 }

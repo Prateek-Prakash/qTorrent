@@ -11,8 +11,8 @@ struct Preferences: Identifiable, Codable {
     var id: UUID = UUID()
     var locale: String?
     var isCreateSubfolderEnabled: Bool?
-    var isStartPausedEnabled: Bool?
-    var autoDeleteMode: Int?
+    var isStartPausedEnabled: Bool
+    var autoDeleteMode: Int
     var isPreallocateAll: Bool?
     var isIncompleteFilesExt: Bool?
     var isAutoTMNEnabled: Bool?
