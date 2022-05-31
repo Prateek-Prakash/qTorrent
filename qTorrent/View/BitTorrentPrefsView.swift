@@ -13,8 +13,6 @@ struct BitTorrentPrefsView: View {
     @State var enableLSD = true
     @State var anonymousMode = false
     
-    let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
     var body: some View {
         VStack {
             List {
@@ -80,11 +78,6 @@ struct BitTorrentPrefsView: View {
         .navigationTitle("BitTorrent")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            Task {
-                await fetchPreferences()
-            }
-        }
-        .onReceive(refreshTimer) { currTime in
             Task {
                 await fetchPreferences()
             }

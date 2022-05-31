@@ -11,8 +11,6 @@ struct DownloadsPrefsView: View {
     @State var autoStartTorrent = true
     @State var deleteTorrentAfter = true
     
-    let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
     var body: some View {
         VStack {
             List {
@@ -50,11 +48,6 @@ struct DownloadsPrefsView: View {
         .navigationTitle("Downloads")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            Task {
-                await fetchPreferences()
-            }
-        }
-        .onReceive(refreshTimer) { currTime in
             Task {
                 await fetchPreferences()
             }
