@@ -69,11 +69,11 @@ struct Preferences: Identifiable, Codable {
     var scheduleToHour: Int?
     var scheduleToMin: Int?
     var schedulerDays:Int?
-    var isDHT: Bool?
-    var isPEX: Bool?
-    var isLSD: Bool?
+    var isDHT: Bool
+    var isPeX: Bool
+    var isLSD: Bool
     var encryption: Int?
-    var isAnonymousMode: Bool?
+    var isAnonymousMode: Bool
     var proxyType: Int?
     var proxyIP: String?
     var proxyPort: Int?
@@ -218,7 +218,7 @@ struct Preferences: Identifiable, Codable {
         case scheduleToMin = "schedule_to_min"
         case schedulerDays = "scheduler_days"
         case isDHT = "dht"
-        case isPEX = "pex"
+        case isPeX = "pex"
         case isLSD = "lsd"
         case encryption = "encryption"
         case isAnonymousMode = "anonymous_mode"
