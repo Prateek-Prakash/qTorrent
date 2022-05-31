@@ -23,13 +23,46 @@ struct AdvancedPrefsView: View {
                     Toggle(isOn: $recheckCompletedTorrents) {
                         Text("Recheck Completed Torrents")
                     }
+                    .onChange(of: recheckCompletedTorrents) { newBool in
+                        let prefs = [
+                            "recheck_completed_torrents": newBool
+                        ]
+                        let json = try? JSONSerialization.data(withJSONObject: prefs)
+                        let string = String(data: json!, encoding: String.Encoding.ascii)
+                        Task {
+                            await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
+                        }
+                    }
                     
                     Toggle(isOn: $resolvePeerCountrie) {
                         Text("Resolve Peer Countries")
                     }
+                    .onChange(of: resolvePeerCountrie) { newBool in
+                        let prefs = [
+                            "resolve_peer_countries": newBool
+                        ]
+                        let json = try? JSONSerialization.data(withJSONObject: prefs)
+                        let string = String(data: json!, encoding: String.Encoding.ascii)
+                        Task {
+                            await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
+                        }
+                    }
                     
                     Toggle(isOn: $embeddedTracker) {
                         Text("Embedded Tracker")
+                    }
+                    .onChange(of: embeddedTracker) { newBool in
+                        let prefs = [
+                            "enable_embedded_tracker": newBool
+                        ]
+                        let json = try? JSONSerialization.data(withJSONObject: prefs)
+                        let string = String(data: json!, encoding: String.Encoding.ascii)
+                        Task {
+                            await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
+                        }
                     }
                     
                     Text("Embedded Tracker Port").badge("9000")
@@ -45,14 +78,52 @@ struct AdvancedPrefsView: View {
                     Toggle(isOn: $enableOSCache) {
                         Text("Enable OS Cache")
                     }
+                    .onChange(of: enableOSCache) { newBool in
+                        let prefs = [
+                            "enable_os_cache": newBool
+                        ]
+                        let json = try? JSONSerialization.data(withJSONObject: prefs)
+                        let string = String(data: json!, encoding: String.Encoding.ascii)
+                        Task {
+                            await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
+                        }
+                    }
                     
                     Toggle(isOn: $coalesceReadsWrites) {
                         Text("Coalesce Reads & Writes")
+                    }
+                    .onChange(of: coalesceReadsWrites) { newBool in
+                        let prefs = [
+                            "enable_coalesce_read_write": newBool
+                        ]
+                        let json = try? JSONSerialization.data(withJSONObject: prefs)
+                        let string = String(data: json!, encoding: String.Encoding.ascii)
+                        Task {
+                            await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
+                        }
                     }
                 }
             }
         }
         .navigationTitle("Advanced")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            Task {
+                await fetchPreferences()
+            }
+        }
+    }
+    
+    // Functions
+    
+    func fetchPreferences() async {
+        let preferences = await TorrentService.shared.getPreferences()
+        recheckCompletedTorrents = preferences!.isRecheckCompletedTorrents
+        resolvePeerCountrie = preferences!.isResolvePeerCountries
+        embeddedTracker = preferences!.isEnableEmbeddedTracker
+        enableOSCache = preferences!.isEnableOSCache
+        coalesceReadsWrites = preferences!.isEnableCoalesceReadWrite
     }
 }

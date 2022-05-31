@@ -91,13 +91,13 @@ struct Preferences: Identifiable, Codable {
     var isWebUIUPNP: Bool?
     var webUIUsername: String?
     var webUIPassword: String?
-    var isWebUICSRFProtectionEnabled: Bool?
-    var isWebUIClickjackingProtectionEnabled: Bool?
+    var isWebUICSRFProtectionEnabled: Bool
+    var isWebUIClickjackingProtectionEnabled: Bool
     var isWebUISecureCookieEnabled: Bool?
     var webUIMaxAuthFailCount: Int?
     var webUIBanDuration: Int?
     var webUISessionTimeout: Int?
-    var isWebUIHostHeaderValidationEnabled: Bool?
+    var isWebUIHostHeaderValidationEnabled: Bool
     var isBypassLocalAuth: Bool?
     var isBypassAuthSubnetWhitelistEnabled: Bool?
     var bypassAuthSubnetWhitelist: String?
@@ -115,9 +115,9 @@ struct Preferences: Identifiable, Codable {
     var dynDNSDomain: String?
     var rssRefreshInterval: Int?
     var rssMaxArticlesPerFeed: Int?
-    var isRSSProcessingEnabled: Bool?
-    var isRSSAutoDownloadingEnabled: Bool?
-    var isRSSDownloadRepackProperEpisodes: Bool?
+    var isRSSProcessingEnabled: Bool
+    var isRSSAutoDownloadingEnabled: Bool
+    var isRSSDownloadRepackProperEpisodes: Bool
     var rssSmartEpisodeFilters: String?
     var isAddTrackersEnabled: Bool?
     var addTrackers: String?
@@ -136,16 +136,16 @@ struct Preferences: Identifiable, Codable {
     var diskCache: Int?
     var diskCacheTTL: Int?
     var embeddedTrackerPort: Int?
-    var isEnableCoalesceReadWrite: Bool?
-    var isEnableEmbeddedTracker: Bool?
+    var isEnableCoalesceReadWrite: Bool
+    var isEnableEmbeddedTracker: Bool
     var isEnableMultiConnectionsFromSameIP: Bool?
-    var isEnableOSCache: Bool?
+    var isEnableOSCache: Bool
     var isEnableUploadSuggestions: Bool?
     var filePoolSize: Int?
     var outgoingPortsMax: Int?
     var outgoingPortsMin: Int?
-    var isRecheckCompletedTorrents: Bool?
-    var isResolvePeerCountries: Bool?
+    var isRecheckCompletedTorrents: Bool
+    var isResolvePeerCountries: Bool
     var saveResumeDataInterval: Int?
     var sendBufferLowWatermark: Int?
     var sendBufferWatermark: Int?
@@ -285,7 +285,7 @@ struct Preferences: Identifiable, Codable {
         case diskCacheTTL = "disk_cache_ttl"
         case embeddedTrackerPort = "embedded_tracker_port"
         case isEnableCoalesceReadWrite = "enable_coalesce_read_write"
-        case isEnableEmbeddedTracker = "enable_embedded_tracker    bool"
+        case isEnableEmbeddedTracker = "enable_embedded_tracker"
         case isEnableMultiConnectionsFromSameIP = "enable_multi_connections_from_same_ip"
         case isEnableOSCache = "enable_os_cache"
         case isEnableUploadSuggestions = "enable_upload_suggestions"
