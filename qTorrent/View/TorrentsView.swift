@@ -139,7 +139,7 @@ struct TorrentsView: View {
                         HStack {
                             Text("Errored")
                             Image(systemName: "exclamationmark")
-                        }.tag(5)
+                        }.tag(6)
                     }
                     .onChange(of: selectedState) { selectedTag in
                         updateDisplayStates()
