@@ -19,7 +19,7 @@ struct PeerLog: Identifiable, Codable {
         case ip = "ip"
         case timestamp = "timestamp"
         case blocked = "blocked"
-        case reason = "reasons"
+        case reason = "reason"
     }
     
     func getLogColor() -> Color? {
