@@ -10,6 +10,7 @@ import SwiftUI
 struct AdvancedPrefsView: View {
     @State var recheckCompletedTorrents = false
     @State var resolvePeerCountrie = true
+    @State var reannounceWhenAddressChanges = false
     @State var embeddedTracker = false
     @State var enableOSCache = true
     @State var coalesceReadsWrites = true
@@ -41,6 +42,21 @@ struct AdvancedPrefsView: View {
                     .onChange(of: resolvePeerCountrie) { newBool in
                         let prefs = [
                             "resolve_peer_countries": newBool
+                        ]
+                        let json = try? JSONSerialization.data(withJSONObject: prefs)
+                        let string = String(data: json!, encoding: String.Encoding.ascii)
+                        Task {
+                            await TorrentService.shared.setPreferences(string!)
+                            await fetchPreferences()
+                        }
+                    }
+                    
+                    Toggle(isOn: $reannounceWhenAddressChanges) {
+                        Text("Reannounce When Address Changes")
+                    }
+                    .onChange(of: reannounceWhenAddressChanges) { newBool in
+                        let prefs = [
+                            "reannounce_when_address_changed": newBool
                         ]
                         let json = try? JSONSerialization.data(withJSONObject: prefs)
                         let string = String(data: json!, encoding: String.Encoding.ascii)
@@ -122,6 +138,7 @@ struct AdvancedPrefsView: View {
         let preferences = await TorrentService.shared.getPreferences()
         recheckCompletedTorrents = preferences!.isRecheckCompletedTorrents
         resolvePeerCountrie = preferences!.isResolvePeerCountries
+        reannounceWhenAddressChanges = preferences!.isReannounceWhenAddressChanged
         embeddedTracker = preferences!.isEnableEmbeddedTracker
         enableOSCache = preferences!.isEnableOSCache
         coalesceReadsWrites = preferences!.isEnableCoalesceReadWrite

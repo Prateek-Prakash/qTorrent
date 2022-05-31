@@ -155,6 +155,7 @@ struct Preferences: Identifiable, Codable {
     var uploadSlotsBehavior: Int?
     var upnpLeaseDuration: Int?
     var utpTCPMixedMode: Int?
+    var isReannounceWhenAddressChanged: Bool
     
     enum CodingKeys: String, CodingKey {
         case locale = "locale"
@@ -303,5 +304,6 @@ struct Preferences: Identifiable, Codable {
         case uploadSlotsBehavior = "upload_slots_behavior"
         case upnpLeaseDuration = "upnp_lease_duration"
         case utpTCPMixedMode = "utp_tcp_mixed_mode"
+        case isReannounceWhenAddressChanged = "reannounce_when_address_changed"
     }
 }
