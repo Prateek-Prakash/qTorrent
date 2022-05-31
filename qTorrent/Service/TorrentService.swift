@@ -106,4 +106,15 @@ class TorrentService {
             return nil
         }
     }
+    
+    // Application
+    
+    public func getPreferences() async -> Preferences? {
+        do {
+            let value = try await AF.request("\(baseUrl)/api/v2/app/preferences").serializingDecodable(Preferences?.self).value
+            return value
+        } catch {
+            return nil
+        }
+    }
 }
