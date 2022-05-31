@@ -27,8 +27,7 @@ struct ContentView: View {
         
         // Attempt Login
         Task {
-            let isLoggedIn = await TorrentService.shared.login()
-            debugPrint("Login Successful: \(isLoggedIn!)")
+            await TorrentService.shared.login()
         }
     }
     
