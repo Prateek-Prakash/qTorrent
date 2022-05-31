@@ -100,13 +100,15 @@ struct TorrentsView: View {
                                     Spacer()
                                     
                                     Image(systemName: "chevron.right")
-                                        .font(.system(size: 10))
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 10, height: 10, alignment: .center)
                                         .foregroundColor(.secondary)
                                         .padding()
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .background(Color(UIColor.secondarySystemBackground))
-                                .cornerRadius(5)
+                                .cornerRadius(8)
                             }
                         }
                     }
