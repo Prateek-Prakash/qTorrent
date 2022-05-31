@@ -18,7 +18,7 @@ struct Torrent: Identifiable, Codable {
     var completionOn: Int?
     var contentPath: String?
     var dlLimit: Int?
-    var dlSpeed: Int?
+    var dlSpeed: Int
     var downloaded: Int?
     var downloadedSession: Int?
     var etaSeconds: Int?
@@ -53,7 +53,7 @@ struct Torrent: Identifiable, Codable {
     var upLimit: Int?
     var uploaded: Int?
     var uploadedSession: Int?
-    var upSpeed: Int?
+    var upSpeed: Int
     
     enum CodingKeys: String, CodingKey {
         case addedOn = "added_on"
