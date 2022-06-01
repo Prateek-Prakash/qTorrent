@@ -139,29 +139,34 @@ struct TorrentsView: View {
                         }.tag(1)
                         
                         HStack {
+                            Text("Active")
+                            Image(systemName: "arrow.up.arrow.down")
+                        }.tag(2)
+                        
+                        HStack {
                             Text("Downloading")
                             Image(systemName: "arrow.down")
-                        }.tag(2)
+                        }.tag(3)
                         
                         HStack {
                             Text("Seeding")
                             Image(systemName: "arrow.up")
-                        }.tag(3)
+                        }.tag(4)
                         
                         HStack {
                             Text("Paused")
                             Image(systemName: "pause")
-                        }.tag(4)
+                        }.tag(5)
                         
                         HStack {
                             Text("Unknown")
                             Image(systemName: "questionmark")
-                        }.tag(5)
+                        }.tag(6)
                         
                         HStack {
                             Text("Errored")
                             Image(systemName: "exclamationmark")
-                        }.tag(6)
+                        }.tag(7)
                     }
                     .onChange(of: selectedState) { selectedTag in
                         updateDisplayStates()
@@ -238,12 +243,23 @@ struct TorrentsView: View {
                 "allocating",
                 "downloading",
                 "metaDL",
+                "checkingDL",
+                "forcedDL",
+                "uploading",
+                "checkingUP",
+                "forcedUP"
+            ]
+        case 3:
+            displayStates = [
+                "allocating",
+                "downloading",
+                "metaDL",
                 "queuedDL",
                 "stalledDL",
                 "checkingDL",
                 "forcedDL"
             ]
-        case 3:
+        case 4:
             displayStates = [
                 "uploading",
                 "queuedUP",
@@ -251,18 +267,18 @@ struct TorrentsView: View {
                 "checkingUP",
                 "forcedUP"
             ]
-        case 4:
+        case 5:
             displayStates = [
                 "pausedUP",
                 "pausedDL"
             ]
-        case 5:
+        case 6:
             displayStates = [
                 "checkingResumeData",
                 "moving",
                 "unknown"
             ]
-        case 6:
+        case 7:
             displayStates = [
                 "error",
                 "missingFiles"
