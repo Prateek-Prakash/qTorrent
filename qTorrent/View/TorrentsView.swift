@@ -137,10 +137,7 @@ struct TorrentsView: View {
                     Button {
                         Task {
                             await TorrentService.shared.toggleSpeedLimitsMode()
-                            let speedLimitsMode = await TorrentService.shared.getSpeedLimitsMode()
-                            if speedLimitsMode != nil {
-                                speedLimitsEnabled = speedLimitsMode!
-                            }
+                            await fetchSpeedLimitsMode()
                         }
                     } label: {
                         if speedLimitsEnabled {
@@ -201,15 +198,13 @@ struct TorrentsView: View {
         .onAppear {
             Task {
                 await fetchTorrents()
-                let speedLimitsMode = await TorrentService.shared.getSpeedLimitsMode()
-                if speedLimitsMode != nil {
-                    speedLimitsEnabled = speedLimitsMode!
-                }
+                await fetchSpeedLimitsMode()
             }
         }
         .onReceive(refreshTimer) { currTime in
             Task {
                 await fetchTorrents()
+                await fetchSpeedLimitsMode()
             }
         }
     }
@@ -225,6 +220,13 @@ struct TorrentsView: View {
             } else {
                 filteredList = torrents
             }
+        }
+    }
+    
+    func fetchSpeedLimitsMode() async {
+        let speedLimitsMode = await TorrentService.shared.getSpeedLimitsMode()
+        if speedLimitsMode != nil {
+            speedLimitsEnabled = speedLimitsMode!
         }
     }
     
