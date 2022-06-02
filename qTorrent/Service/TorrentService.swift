@@ -129,4 +129,24 @@ class TorrentService {
             return nil
         }
     }
+    
+    // Transfer Info
+    
+    public func getSpeedLimitsMode() async -> Bool? {
+        do {
+            let value = try await AF.request("\(baseUrl)/api/v2/transfer/speedLimitsMode").serializingString().value
+            return value == "1"
+        } catch {
+            return nil
+        }
+    }
+    
+    public func toggleSpeedLimitsMode() async -> Bool? {
+        do {
+            let value = try await AF.request("\(baseUrl)/api/v2/transfer/toggleSpeedLimitsMode").serializingString().value
+            return value.isEmpty
+        } catch {
+            return nil
+        }
+    }
 }

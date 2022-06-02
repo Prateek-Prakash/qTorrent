@@ -50,60 +50,62 @@ struct MainLogsPrefsView: View {
         .navigationTitle("Main Logs")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            Menu {
-                Button {
-                    if displayTypes.contains(1) {
-                        displayTypes.remove(at: displayTypes.firstIndex(of: 1)!)
-                    } else {
-                        displayTypes.append(1)
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Button {
+                        if displayTypes.contains(1) {
+                            displayTypes.remove(at: displayTypes.firstIndex(of: 1)!)
+                        } else {
+                            displayTypes.append(1)
+                        }
+                    } label: {
+                        Text("Normal").tag(1)
+                        if displayTypes.contains(1) {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                    
+                    Button {
+                        if displayTypes.contains(2) {
+                            displayTypes.remove(at: displayTypes.firstIndex(of: 2)!)
+                        } else {
+                            displayTypes.append(2)
+                        }
+                    } label: {
+                        Text("Info").tag(2)
+                        if displayTypes.contains(2) {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                    
+                    Button {
+                        if displayTypes.contains(3) {
+                            displayTypes.remove(at: displayTypes.firstIndex(of: 3)!)
+                        } else {
+                            displayTypes.append(3)
+                        }
+                    } label: {
+                        Text("Warning").tag(3)
+                        if displayTypes.contains(3) {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                    
+                    Button {
+                        if displayTypes.contains(8) {
+                            displayTypes.remove(at: displayTypes.firstIndex(of: 8)!)
+                        } else {
+                            displayTypes.append(8)
+                        }
+                    } label: {
+                        Text("Critical").tag(8)
+                        if displayTypes.contains(8) {
+                            Image(systemName: "checkmark")
+                        }
                     }
                 } label: {
-                    Text("Normal").tag(1)
-                    if displayTypes.contains(1) {
-                        Image(systemName: "checkmark")
-                    }
+                    Label("Filter", systemImage: "slider.horizontal.3")
                 }
-                
-                Button {
-                    if displayTypes.contains(2) {
-                        displayTypes.remove(at: displayTypes.firstIndex(of: 2)!)
-                    } else {
-                        displayTypes.append(2)
-                    }
-                } label: {
-                    Text("Info").tag(2)
-                    if displayTypes.contains(2) {
-                        Image(systemName: "checkmark")
-                    }
-                }
-                
-                Button {
-                    if displayTypes.contains(3) {
-                        displayTypes.remove(at: displayTypes.firstIndex(of: 3)!)
-                    } else {
-                        displayTypes.append(3)
-                    }
-                } label: {
-                    Text("Warning").tag(3)
-                    if displayTypes.contains(3) {
-                        Image(systemName: "checkmark")
-                    }
-                }
-                
-                Button {
-                    if displayTypes.contains(8) {
-                        displayTypes.remove(at: displayTypes.firstIndex(of: 8)!)
-                    } else {
-                        displayTypes.append(8)
-                    }
-                } label: {
-                    Text("Critical").tag(8)
-                    if displayTypes.contains(8) {
-                        Image(systemName: "checkmark")
-                    }
-                }
-            } label: {
-                Label("Filter", systemImage: "slider.horizontal.3")
             }
         }
         .onAppear {

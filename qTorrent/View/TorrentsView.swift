@@ -16,6 +16,8 @@ struct TorrentsView: View {
     
     let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
+    @State var speedLimitsEnabled = false
+    
     @State var displayStates = [
         "error",
         "missingFiles",
@@ -131,54 +133,78 @@ struct TorrentsView: View {
             }
             .navigationTitle("Torrents")
             .toolbar {
-                Menu {
-                    Picker(selection: $selectedState, label: Text("Sorting options")) {
-                        HStack {
-                            Text("All")
-                            Image(systemName: "circle.hexagongrid")
-                        }.tag(1)
-                        
-                        HStack {
-                            Text("Active")
-                            Image(systemName: "arrow.up.arrow.down")
-                        }.tag(2)
-                        
-                        HStack {
-                            Text("Downloading")
-                            Image(systemName: "arrow.down")
-                        }.tag(3)
-                        
-                        HStack {
-                            Text("Seeding")
-                            Image(systemName: "arrow.up")
-                        }.tag(4)
-                        
-                        HStack {
-                            Text("Paused")
-                            Image(systemName: "pause")
-                        }.tag(5)
-                        
-                        HStack {
-                            Text("Unknown")
-                            Image(systemName: "questionmark")
-                        }.tag(6)
-                        
-                        HStack {
-                            Text("Errored")
-                            Image(systemName: "exclamationmark")
-                        }.tag(7)
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        Task {
+                            await TorrentService.shared.toggleSpeedLimitsMode()
+                            let speedLimitsMode = await TorrentService.shared.getSpeedLimitsMode()
+                            if speedLimitsMode != nil {
+                                speedLimitsEnabled = speedLimitsMode!
+                            }
+                        }
+                    } label: {
+                        if speedLimitsEnabled {
+                            Image(systemName: "tortoise")
+                        } else {
+                            Image(systemName: "hare")
+                        }
                     }
-                    .onChange(of: selectedState) { selectedTag in
-                        updateDisplayStates()
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Picker(selection: $selectedState, label: Text("Sorting options")) {
+                            HStack {
+                                Text("All")
+                                Image(systemName: "circle.hexagongrid")
+                            }.tag(1)
+                            
+                            HStack {
+                                Text("Active")
+                                Image(systemName: "arrow.up.arrow.down")
+                            }.tag(2)
+                            
+                            HStack {
+                                Text("Downloading")
+                                Image(systemName: "arrow.down")
+                            }.tag(3)
+                            
+                            HStack {
+                                Text("Seeding")
+                                Image(systemName: "arrow.up")
+                            }.tag(4)
+                            
+                            HStack {
+                                Text("Paused")
+                                Image(systemName: "pause")
+                            }.tag(5)
+                            
+                            HStack {
+                                Text("Unknown")
+                                Image(systemName: "questionmark")
+                            }.tag(6)
+                            
+                            HStack {
+                                Text("Errored")
+                                Image(systemName: "exclamationmark")
+                            }.tag(7)
+                        }
+                        .onChange(of: selectedState) { selectedTag in
+                            updateDisplayStates()
+                        }
+                    } label: {
+                        Label("Filter", systemImage: "slider.horizontal.3")
                     }
-                } label: {
-                    Label("Filter", systemImage: "slider.horizontal.3")
                 }
             }
         }
         .onAppear {
             Task {
                 await fetchTorrents()
+                let speedLimitsMode = await TorrentService.shared.getSpeedLimitsMode()
+                if speedLimitsMode != nil {
+                    speedLimitsEnabled = speedLimitsMode!
+                }
             }
         }
         .onReceive(refreshTimer) { currTime in
