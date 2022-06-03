@@ -39,6 +39,8 @@
 		6EB327B92842AACB003CA9E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB327B82842AACB003CA9E3 /* ContentView.swift */; };
 		6EB327BB2842AACB003CA9E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EB327BA2842AACB003CA9E3 /* Assets.xcassets */; };
 		6EB327BE2842AACB003CA9E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EB327BD2842AACB003CA9E3 /* Preview Assets.xcassets */; };
+		6EB8D03B284ABE1100BABA69 /* PieceMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8D03A284ABE1100BABA69 /* PieceMapView.swift */; };
+		6EB8D03D284AC5CA00BABA69 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8D03C284AC5CA00BABA69 /* Piece.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		6EB327B82842AACB003CA9E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6EB327BA2842AACB003CA9E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6EB327BD2842AACB003CA9E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6EB8D03A284ABE1100BABA69 /* PieceMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceMapView.swift; sourceTree = "<group>"; };
+		6EB8D03C284AC5CA00BABA69 /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 				6E39A4872844F229004C71B3 /* PeerLog.swift */,
 				6E39A489284599AC004C71B3 /* Preferences.swift */,
 				6E39A48F284A8A11004C71B3 /* Plugin.swift */,
+				6EB8D03C284AC5CA00BABA69 /* Piece.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 				6E2264FF28432DCD005FB27F /* WebUIPrefsView.swift */,
 				6E2264F928432C7E005FB27F /* AdvancedPrefsView.swift */,
 				6E2264D02842C2A1005FB27F /* AppThemePrefsView.swift */,
+				6EB8D03A284ABE1100BABA69 /* PieceMapView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -290,9 +296,11 @@
 				6EB327B72842AACB003CA9E3 /* qTorrentApp.swift in Sources */,
 				6E2265082843F839005FB27F /* MainLog.swift in Sources */,
 				6E39A48A284599AC004C71B3 /* Preferences.swift in Sources */,
+				6EB8D03B284ABE1100BABA69 /* PieceMapView.swift in Sources */,
 				6E39A48E284A3507004C71B3 /* SearchView.swift in Sources */,
 				6E39A4882844F229004C71B3 /* PeerLog.swift in Sources */,
 				6E39A490284A8A11004C71B3 /* Plugin.swift in Sources */,
+				6EB8D03D284AC5CA00BABA69 /* Piece.swift in Sources */,
 				6E2264DA2842C579005FB27F /* TextFieldClearModifier.swift in Sources */,
 				6E2264CF2842C283005FB27F /* DeferView.swift in Sources */,
 			);

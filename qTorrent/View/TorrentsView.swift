@@ -105,12 +105,16 @@ struct TorrentsView: View {
                                     
                                     Spacer()
                                     
-                                    Image(systemName: "chevron.right")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 10, height: 10, alignment: .center)
-                                        .foregroundColor(.secondary)
-                                        .padding()
+                                    NavigationLink(destination: DeferView {
+                                        PieceMapView(torrentHash: torrent.hash)
+                                    }) {
+                                        Image(systemName: "chevron.right")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 10, height: 10, alignment: .center)
+                                            .foregroundColor(.secondary)
+                                            .padding()
+                                    }
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .background(Color(UIColor.secondarySystemBackground))

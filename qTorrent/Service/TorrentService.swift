@@ -77,6 +77,22 @@ class TorrentService {
         }
     }
     
+    public func getPieceStates(_ hash: String) async -> [Piece]? {
+        do {
+            let params: [String: Any] = [
+                "hash": hash
+            ]
+            let values = try await AF.request("\(baseUrl)/api/v2/torrents/pieceStates", parameters: params).serializingDecodable([Int]?.self).value
+            var pieces: [Piece] = []
+            for val in values! {
+                pieces.append(Piece(id: UUID(), value: val))
+            }
+            return pieces
+        } catch {
+            return nil
+        }
+    }
+    
     // Logs
     
     public func getMainLogs() async -> [MainLog]? {
