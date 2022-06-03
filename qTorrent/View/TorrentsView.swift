@@ -50,15 +50,14 @@ struct TorrentsView: View {
                             if displayStates.contains(torrent.state) {
                                 HStack(alignment: .center, spacing: 0) {
                                     Button(action: {
+                                        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                                         let canPause = torrent.canPause()
                                         let canResume = torrent.canResume()
                                         if canPause != nil && canPause! {
-                                            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                                             Task {
                                                 await TorrentService.shared.pause([torrent.hash])
                                             }
                                         } else if canResume != nil && canResume! {
-                                            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                                             Task {
                                                 await TorrentService.shared.resume([torrent.hash])
                                             }
@@ -137,6 +136,7 @@ struct TorrentsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
+                        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         Task {
                             await TorrentService.shared.toggleSpeedLimitsMode()
                             await fetchSpeedLimitsMode()
