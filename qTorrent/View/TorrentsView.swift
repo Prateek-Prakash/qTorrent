@@ -53,10 +53,12 @@ struct TorrentsView: View {
                                         let canPause = torrent.canPause()
                                         let canResume = torrent.canResume()
                                         if canPause != nil && canPause! {
+                                            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                                             Task {
                                                 await TorrentService.shared.pause([torrent.hash])
                                             }
                                         } else if canResume != nil && canResume! {
+                                            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                                             Task {
                                                 await TorrentService.shared.resume([torrent.hash])
                                             }
