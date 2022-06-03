@@ -125,8 +125,8 @@ struct MainLogsPrefsView: View {
     func fetchMainLogs() async {
         let mainLogs = await TorrentService.shared.getMainLogs()
         DispatchQueue.main.async {
-            completeList = mainLogs
-            filteredList = mainLogs
+            completeList = mainLogs?.reversed()
+            filteredList = mainLogs?.reversed()
         }
     }
 }

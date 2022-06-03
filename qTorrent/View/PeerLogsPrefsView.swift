@@ -58,7 +58,7 @@ struct PeerLogsPrefsView: View {
     func fetchPeerLogs() async {
         let peerLogs = await TorrentService.shared.getPeerLogs()
         DispatchQueue.main.async {
-            completeList = peerLogs
+            completeList = peerLogs?.reversed()
         }
     }
 }
