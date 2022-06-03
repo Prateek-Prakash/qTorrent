@@ -32,7 +32,7 @@ class TorrentService {
     
     public func logout() async -> Bool? {
         do {
-            let value = try await AF.request("\(baseUrl)/api/v2/auth/logout").serializingString().value
+            let value = try await AF.request("\(baseUrl)/api/v2/auth/logout").serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -58,7 +58,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "hashes": hashes.joined(separator: "|")
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/torrents/pause", parameters: params).serializingString().value
+            let value = try await AF.request("\(baseUrl)/api/v2/torrents/pause", parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -70,7 +70,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "hashes": hashes.joined(separator: "|")
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/torrents/resume", parameters: params).serializingString().value
+            let value = try await AF.request("\(baseUrl)/api/v2/torrents/resume", parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -123,7 +123,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "json": json
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/app/setPreferences", parameters: params).serializingString().value
+            let value = try await AF.request("\(baseUrl)/api/v2/app/setPreferences", parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -143,7 +143,31 @@ class TorrentService {
     
     public func toggleSpeedLimitsMode() async -> Bool? {
         do {
-            let value = try await AF.request("\(baseUrl)/api/v2/transfer/toggleSpeedLimitsMode").serializingString().value
+            let value = try await AF.request("\(baseUrl)/api/v2/transfer/toggleSpeedLimitsMode").serializingString(emptyResponseCodes: [200]).value
+            return value.isEmpty
+        } catch {
+            return nil
+        }
+    }
+    
+    // Search
+    
+    public func getPlugins() async -> [Plugin]? {
+        do {
+            let value = try await AF.request("\(baseUrl)/api/v2/search/plugins").serializingDecodable([Plugin]?.self).value
+            return value
+        } catch {
+            return nil
+        }
+    }
+    
+    public func togglePlugins(_ names: [String], _ enable: Bool) async -> Bool? {
+        do {
+            let params: [String: Any] = [
+                "names": names.joined(separator: "|"),
+                "enable": String(enable)
+            ]
+            let value = try await AF.request("\(baseUrl)/api/v2/search/enablePlugin", parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
