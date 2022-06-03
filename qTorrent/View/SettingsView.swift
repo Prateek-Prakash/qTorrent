@@ -27,6 +27,12 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink(destination: DeferView {
+                        PluginsPrefsView()
+                    }) {
+                        Label("Search Plugins", systemImage: "magnifyingglass").labelStyle(ColorfulIconLabelStyle(color: Color(.systemPurple), size: 1))
+                    }
+                    
+                    NavigationLink(destination: DeferView {
                         ConfigPrefsView()
                     }) {
                         Label("Configuration", systemImage: "gearshape.2.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemGray), size: 1))

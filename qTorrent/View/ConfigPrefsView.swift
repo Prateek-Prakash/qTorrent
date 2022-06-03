@@ -18,20 +18,17 @@ struct ConfigPrefsView: View {
                         Text("Downloads")
                     }
                     
-                    
                     NavigationLink(destination: DeferView {
                         ConnectionPrefsView()
                     }) {
                         Text("Connection")
                     }
                     
-                    
                     NavigationLink(destination: DeferView {
                         SpeedPrefsView()
                     }) {
                         Text("Speed")
                     }
-                    
                     
                     NavigationLink(destination: DeferView {
                         BitTorrentPrefsView()
@@ -50,7 +47,6 @@ struct ConfigPrefsView: View {
                     }) {
                         Text("Web UI")
                     }
-                    
                     
                     NavigationLink(destination: DeferView {
                         AdvancedPrefsView()
