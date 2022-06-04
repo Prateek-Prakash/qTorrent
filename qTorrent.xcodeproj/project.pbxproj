@@ -184,6 +184,7 @@
 				6EB327B82842AACB003CA9E3 /* ContentView.swift */,
 				6E2264CE2842C283005FB27F /* DeferView.swift */,
 				6E2264C82842BD57005FB27F /* TorrentsView.swift */,
+				6EB8D03A284ABE1100BABA69 /* PieceMapView.swift */,
 				6E39A48D284A3507004C71B3 /* SearchView.swift */,
 				6E2264CA2842BD62005FB27F /* SettingsView.swift */,
 				6E2264D72842C481005FB27F /* AuthPrefsView.swift */,
@@ -200,7 +201,6 @@
 				6E2264FF28432DCD005FB27F /* WebUIPrefsView.swift */,
 				6E2264F928432C7E005FB27F /* AdvancedPrefsView.swift */,
 				6E2264D02842C2A1005FB27F /* AppThemePrefsView.swift */,
-				6EB8D03A284ABE1100BABA69 /* PieceMapView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

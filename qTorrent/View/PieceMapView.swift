@@ -47,7 +47,7 @@ struct PieceMapView: View {
     // Functions
     
     func fetchPieceStates() async {
-        let pieceStates = await TorrentService.shared.getPieceStates(self.torrentHash)
+        let pieceStates = await TorrentService.shared.getPieceStates(torrentHash)
         completeList = pieceStates
     }
 }
