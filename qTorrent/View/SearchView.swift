@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State private var searchId: Int? = nil
+    @AppStorage("searchId") private var searchId = -1
     @State private var searchQuery = ""
     
     @State private var searchResults: SearchResults? = nil
@@ -66,9 +66,16 @@ struct SearchView: View {
                     await startSearch()
                 }
             }
+            .onChange(of: searchQuery) { searchQuery in
+                if searchQuery.isEmpty {
+                    Task {
+                        await resetSearch()
+                    }
+                }
+            }
             .onReceive(refreshTimer) { currTime in
                 Task {
-                    if searchId != nil && searchResults?.status != "Stopped" {
+                    if searchId != -1 && searchResults?.status != "Stopped" {
                         await fetchSearchResults()
                     }
                 }
@@ -88,17 +95,17 @@ struct SearchView: View {
     }
     
     func resetSearch() async {
-        if searchId != nil {
-            await TorrentService.shared.stopSearch(searchId!)
-            await TorrentService.shared.deleteSearch(searchId!)
-            searchId = nil
+        if searchId != -1 {
+            await TorrentService.shared.stopSearch(searchId)
+            await TorrentService.shared.deleteSearch(searchId)
+            searchId = -1
             searchResults = nil
         }
     }
     
     func fetchSearchResults() async {
-        if searchId != nil {
-            if let results = await TorrentService.shared.getSearchResults(searchId!) {
+        if searchId != -1 {
+            if let results = await TorrentService.shared.getSearchResults(searchId) {
                 searchResults = results
             }
         }

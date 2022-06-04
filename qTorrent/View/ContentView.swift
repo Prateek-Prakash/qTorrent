@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("searchId") private var searchId = -1
+    
     init() {
         // Rounded NavigationBar Title
         var titleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
@@ -50,6 +52,14 @@ struct ContentView: View {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
+        }
+        .onAppear {
+            Task {
+                if searchId != -1 {
+                    await TorrentService.shared.stopSearch(searchId)
+                    await TorrentService.shared.deleteSearch(searchId)
+                }
+            }
         }
     }
 }
