@@ -10,7 +10,6 @@ import SwiftUI
 struct SearchView: View {
     @AppStorage("searchId") private var searchId = -1
     @State private var searchQuery = ""
-    
     @State private var searchResults: SearchResults? = nil
     
     let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -23,25 +22,37 @@ struct SearchView: View {
                         ForEach(results.indices, id: \.self) { resultIndex in
                             let result = results[resultIndex]
                             HStack(alignment: .center, spacing: 0) {
-                                Image(systemName: "doc.plaintext.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 18, height: 18, alignment: .center)
-                                    .padding()
+                                Button(action: {
+                                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                                }) {
+                                    Image(systemName: "tray.and.arrow.down.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 18, height: 18, alignment: .center)
+                                        .padding()
+                                }
                                 
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text(result.fileName.uppercased())
                                         .font(.system(size: 10, weight: .bold))
                                     
-                                    HStack {
+                                    HStack(spacing: 0) {
                                         HStack {
                                             Text("Seeders • \(result.seeders)")
-                                                .font(.system(size: 10))
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(Color(.systemGray))
                                         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                         
                                         HStack {
                                             Text("Leechers • \(result.leechers)")
-                                                .font(.system(size: 10))
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(Color(.systemGray))
+                                        }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                        
+                                        HStack {
+                                            Text("Size • \(result.getFileSizeString())")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(Color(.systemGray))
                                         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                     }
                                 }

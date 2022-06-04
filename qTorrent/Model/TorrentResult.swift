@@ -11,7 +11,7 @@ struct TorrentResult: Identifiable, Codable {
     var id: UUID = UUID()
     var descLink: String
     var fileName: String
-    var fileSize: Int
+    var fileSize: Int64
     var fileUrl: String
     var leechers: Int
     var seeders: Int
@@ -25,5 +25,10 @@ struct TorrentResult: Identifiable, Codable {
         case leechers = "nbLeechers"
         case seeders = "nbSeeders"
         case siteUrl = "siteUrl"
+    }
+    
+    func getFileSizeString() -> String {
+        return ByteCountFormatter.string(fromByteCount: fileSize, countStyle: .file)
+            .replacingOccurrences(of: "bytes", with: "B")
     }
 }
