@@ -93,6 +93,22 @@ class TorrentService {
         }
     }
     
+    public func addTorrent(_ url: String) async -> Bool? {
+        do {
+            let params: [String: String] = [
+                "urls": url,
+            ]
+            let value = try await AF.upload(multipartFormData: { multiFormData in
+                for (key, value) in params {
+                    multiFormData.append(Data(value.utf8), withName: key)
+                }
+            }, to: "\(baseUrl)/api/v2/torrents/add").serializingString().value
+            return value == "Ok."
+        } catch {
+            return nil
+        }
+    }
+    
     // Logs
     
     public func getMainLogs() async -> [MainLog]? {

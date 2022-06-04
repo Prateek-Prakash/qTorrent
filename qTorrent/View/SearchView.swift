@@ -24,6 +24,9 @@ struct SearchView: View {
                             HStack(alignment: .center, spacing: 0) {
                                 Button(action: {
                                     UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                                    Task {
+                                        await TorrentService.shared.addTorrent(result.fileUrl)
+                                    }
                                 }) {
                                     Image(systemName: "tray.and.arrow.down.fill")
                                         .resizable()
