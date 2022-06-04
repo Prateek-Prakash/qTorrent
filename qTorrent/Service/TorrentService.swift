@@ -189,4 +189,54 @@ class TorrentService {
             return nil
         }
     }
+    
+    public func startSearch(_ pattern: String) async -> StartSearch? {
+        do {
+            let params: [String: Any] = [
+                "pattern": pattern,
+                "plugins": "all",
+                "category": "all"
+            ]
+            let value = try await AF.request("\(baseUrl)/api/v2/search/start", parameters: params).serializingDecodable(StartSearch?.self).value
+            return value
+        } catch {
+            return nil
+        }
+    }
+    
+    public func stopSearch(_ id: Int) async -> Bool? {
+        do {
+            let params: [String: Any] = [
+                "id": id
+            ]
+            let value = try await AF.request("\(baseUrl)/api/v2/search/stop", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            return value.isEmpty
+        } catch {
+            return nil
+        }
+    }
+    
+    public func deleteSearch(_ id: Int) async -> Bool? {
+        do {
+            let params: [String: Any] = [
+                "id": id
+            ]
+            let value = try await AF.request("\(baseUrl)/api/v2/search/delete", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            return value.isEmpty
+        } catch {
+            return nil
+        }
+    }
+    
+    public func getSearchResults(_ id: Int) async -> SearchResults? {
+        do {
+            let params: [String: Any] = [
+                "id": id
+            ]
+            let value = try await AF.request("\(baseUrl)/api/v2/search/results", parameters: params).serializingDecodable(SearchResults?.self).value
+            return value
+        } catch {
+            return nil
+        }
+    }
 }
