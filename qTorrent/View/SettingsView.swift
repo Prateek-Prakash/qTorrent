@@ -39,7 +39,7 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section(header: Text("Customization")) {
+                Section(header: Text("CUSTOMIZATION")) {
                     NavigationLink(destination: DeferView {
                         AppThemePrefsView()
                     }) {
