@@ -5,9 +5,10 @@
 //  Created by Prateek Prakash on 5/28/22.
 //
 
+import BetterListPicker
 import SwiftUI
 
-enum AppTheme: String {
+enum AppTheme: String, CaseIterable {
     case system = "System"
     case dark = "Dark"
     case light = "Light"
@@ -22,4 +23,9 @@ enum AppTheme: String {
             return .dark
         }
     }
+}
+
+extension AppTheme: BetterListPickerSelectable, Identifiable {
+    var id: String { rawValue }
+    var title: String { rawValue }
 }

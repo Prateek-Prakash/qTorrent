@@ -35,6 +35,7 @@
 		6E39A48C284A2AA6004C71B3 /* PluginsPrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39A48B284A2AA6004C71B3 /* PluginsPrefsView.swift */; };
 		6E39A48E284A3507004C71B3 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39A48D284A3507004C71B3 /* SearchView.swift */; };
 		6E39A490284A8A11004C71B3 /* Plugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E39A48F284A8A11004C71B3 /* Plugin.swift */; };
+		6E4358E7285AF0BF00AAEF1E /* BetterListPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 6E4358E6285AF0BF00AAEF1E /* BetterListPicker */; };
 		6EB327B72842AACB003CA9E3 /* qTorrentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB327B62842AACB003CA9E3 /* qTorrentApp.swift */; };
 		6EB327B92842AACB003CA9E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB327B82842AACB003CA9E3 /* ContentView.swift */; };
 		6EB327BB2842AACB003CA9E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EB327BA2842AACB003CA9E3 /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E4358E7285AF0BF00AAEF1E /* BetterListPicker in Frameworks */,
 				6E2264EB2842DEB5005FB27F /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,6 +225,7 @@
 			name = qTorrent;
 			packageProductDependencies = (
 				6E2264EA2842DEB5005FB27F /* Alamofire */,
+				6E4358E6285AF0BF00AAEF1E /* BetterListPicker */,
 			);
 			productName = qTorrent;
 			productReference = 6EB327B32842AACB003CA9E3 /* qTorrent.app */;
@@ -254,6 +257,7 @@
 			mainGroup = 6EB327AA2842AACB003CA9E3;
 			packageReferences = (
 				6E2264E92842DEB5005FB27F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				6E4358E5285AF0BF00AAEF1E /* XCRemoteSwiftPackageReference "BetterListPicker" */,
 			);
 			productRefGroup = 6EB327B42842AACB003CA9E3 /* Products */;
 			projectDirPath = "";
@@ -527,6 +531,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		6E4358E5285AF0BF00AAEF1E /* XCRemoteSwiftPackageReference "BetterListPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Jinya/BetterListPicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -534,6 +546,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6E2264E92842DEB5005FB27F /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		6E4358E6285AF0BF00AAEF1E /* BetterListPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E4358E5285AF0BF00AAEF1E /* XCRemoteSwiftPackageReference "BetterListPicker" */;
+			productName = BetterListPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

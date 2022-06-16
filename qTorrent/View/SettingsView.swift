@@ -5,6 +5,7 @@
 //  Created by Prateek Prakash on 5/28/22.
 //
 
+import BetterListPicker
 import SwiftUI
 
 struct SettingsView: View {
@@ -40,11 +41,10 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("CUSTOMIZATION")) {
-                    NavigationLink(destination: DeferView {
-                        AppThemePrefsView()
-                    }) {
+                    BetterListPicker($appTheme, pickerData: AppTheme.allCases) {
+                        Text("App Theme")
+                    } label: {
                         Label("App Theme", systemImage: "paintbrush.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemIndigo), size: 1))
-                            .badge(Text(appTheme.rawValue))
                     }
                 }
             }
