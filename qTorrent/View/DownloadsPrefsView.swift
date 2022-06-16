@@ -8,90 +8,71 @@
 import SwiftUI
 
 struct DownloadsPrefsView: View {
-    @State var preallocateDiskSpace = false
-    @State var appendIncompleteExtension = true
-    @State var autoStartTorrent = true
-    @State var deleteTorrentAfter = true
-    @State var runExternalProgram = false
+    @EnvironmentObject var configPrefaData: ConfigPrefsViewModel
     
     var body: some View {
         VStack {
             List {
-                Toggle(isOn: $preallocateDiskSpace) {
+                Toggle(isOn: $configPrefaData.preallocateDiskSpace) {
                     Text("Pre-Allocate Disk Space For Files")
                 }
-                .onChange(of: preallocateDiskSpace) { newBool in
+                .onChange(of: configPrefaData.preallocateDiskSpace) { newValue in
                     let prefs = [
-                        "preallocate_all": newBool
+                        "preallocate_all": newValue
                     ]
-                    let json = try? JSONSerialization.data(withJSONObject: prefs)
-                    let string = String(data: json!, encoding: String.Encoding.ascii)
                     Task {
-                        await TorrentService.shared.setPreferences(string!)
-                        await fetchPreferences()
+                        await configPrefaData.updatePreferences(prefs)
                     }
                 }
                 
-                Toggle(isOn: $appendIncompleteExtension) {
+                Toggle(isOn: $configPrefaData.appendIncompleteExtension) {
                     Text("Append !.qB For Incomplete Files")
                 }
-                .onChange(of: appendIncompleteExtension) { newBool in
+                .onChange(of: configPrefaData.appendIncompleteExtension) { newValue in
                     let prefs = [
-                        "incomplete_files_ext": newBool
+                        "incomplete_files_ext": newValue
                     ]
-                    let json = try? JSONSerialization.data(withJSONObject: prefs)
-                    let string = String(data: json!, encoding: String.Encoding.ascii)
                     Task {
-                        await TorrentService.shared.setPreferences(string!)
-                        await fetchPreferences()
+                        await configPrefaData.updatePreferences(prefs)
                     }
                 }
                 
                 Section(header: Text("TORRENT ADDITION")) {
-                    Toggle(isOn: $autoStartTorrent) {
+                    Toggle(isOn: $configPrefaData.autoStartTorrent) {
                         Text("Auto Start Torrent")
                     }
-                    .onChange(of: autoStartTorrent) { newBool in
+                    .onChange(of: configPrefaData.autoStartTorrent) { newValue in
                         let prefs = [
-                            "start_paused_enabled": !newBool
+                            "start_paused_enabled": !newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                     
-                    Toggle(isOn: $deleteTorrentAfter) {
+                    Toggle(isOn: $configPrefaData.deleteTorrentAfter) {
                         Text("Delete Torrent After")
                     }
-                    .onChange(of: deleteTorrentAfter) { newBool in
+                    .onChange(of: configPrefaData.deleteTorrentAfter) { newValue in
                         let prefs = [
-                            "auto_delete_mode": newBool ? 1 : 0
+                            "auto_delete_mode": newValue ? 1 : 0
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                 }
                 
                 Section(header: Text("TORRENT COMPLETION")) {
-                    Toggle(isOn: $runExternalProgram) {
+                    Toggle(isOn: $configPrefaData.runExternalProgram) {
                         Text("Run External Program")
                     }
-                    .onChange(of: runExternalProgram) { newBool in
+                    .onChange(of: configPrefaData.runExternalProgram) { newValue in
                         let prefs = [
-                            "autorun_enabled": newBool
+                            "autorun_enabled": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                 }
@@ -99,20 +80,5 @@ struct DownloadsPrefsView: View {
         }
         .navigationTitle("Downloads")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            Task {
-                await fetchPreferences()
-            }
-        }
-    }
-    
-    // Functions
-    
-    func fetchPreferences() async {
-        let preferences = await TorrentService.shared.getPreferences()
-        preallocateDiskSpace = preferences!.isPreallocateAll
-        appendIncompleteExtension = preferences!.isIncompleteFilesExt
-        autoStartTorrent = !preferences!.isStartPausedEnabled
-        deleteTorrentAfter = preferences!.autoDeleteMode == 1 ? true : false
     }
 }

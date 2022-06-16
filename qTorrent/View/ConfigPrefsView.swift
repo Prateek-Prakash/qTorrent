@@ -8,48 +8,50 @@
 import SwiftUI
 
 struct ConfigPrefsView: View {
+    @EnvironmentObject var configPrefaData: ConfigPrefsViewModel
+    
     var body: some View {
         VStack {
             List {
                 Section(header: Text("CATEGORIES")) {
                     NavigationLink(destination: DeferView {
-                        DownloadsPrefsView()
+                        DownloadsPrefsView().environmentObject(configPrefaData)
                     }) {
                         Text("Downloads")
                     }
                     
                     NavigationLink(destination: DeferView {
-                        ConnectionPrefsView()
+                        ConnectionPrefsView().environmentObject(configPrefaData)
                     }) {
                         Text("Connection")
                     }
                     
                     NavigationLink(destination: DeferView {
-                        SpeedPrefsView()
+                        SpeedPrefsView().environmentObject(configPrefaData)
                     }) {
                         Text("Speed")
                     }
                     
                     NavigationLink(destination: DeferView {
-                        BitTorrentPrefsView()
+                        BitTorrentPrefsView().environmentObject(configPrefaData)
                     }) {
                         Text("BitTorrent")
                     }
                     
                     NavigationLink(destination: DeferView {
-                        RSSPrefsView()
+                        RSSPrefsView().environmentObject(configPrefaData)
                     }) {
                         Text("RSS")
                     }
                     
                     NavigationLink(destination: DeferView {
-                        WebUIPrefsView()
+                        WebUIPrefsView().environmentObject(configPrefaData)
                     }) {
                         Text("Web UI")
                     }
                     
                     NavigationLink(destination: DeferView {
-                        AdvancedPrefsView()
+                        AdvancedPrefsView().environmentObject(configPrefaData)
                     }) {
                         Text("Advanced")
                     }

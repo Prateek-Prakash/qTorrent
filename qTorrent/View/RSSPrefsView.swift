@@ -8,26 +8,21 @@
 import SwiftUI
 
 struct RSSPrefsView: View {
-    @State var fetchRSSFeeds = false
-    @State var autoDownloadRSSTorrents = false
-    @State var downloadRepackProperEpisodes = true
+    @EnvironmentObject var configPrefaData: ConfigPrefsViewModel
     
     var body: some View {
         VStack {
             List {
                 Section(header: Text("RSS READER")) {
-                    Toggle(isOn: $fetchRSSFeeds) {
+                    Toggle(isOn: $configPrefaData.fetchRSSFeeds) {
                         Text("Fetch RSS Feeds")
                     }
-                    .onChange(of: fetchRSSFeeds) { newBool in
+                    .onChange(of: configPrefaData.fetchRSSFeeds) { newValue in
                         let prefs = [
-                            "rss_processing_enabled": newBool
+                            "rss_processing_enabled": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                     
@@ -37,35 +32,29 @@ struct RSSPrefsView: View {
                 }
                 
                 Section(header: Text("RSS AUTO DOWNLOADER")) {
-                    Toggle(isOn: $autoDownloadRSSTorrents) {
+                    Toggle(isOn: $configPrefaData.autoDownloadRSSTorrents) {
                         Text("Auto Download RSS Torrents")
                     }
-                    .onChange(of: autoDownloadRSSTorrents) { newBool in
+                    .onChange(of: configPrefaData.autoDownloadRSSTorrents) { newValue in
                         let prefs = [
-                            "rss_auto_downloading_enabled": newBool
+                            "rss_auto_downloading_enabled": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                 }
                 
                 Section(header: Text("RSS SMART EPISODE FILTER")) {
-                    Toggle(isOn: $downloadRepackProperEpisodes) {
+                    Toggle(isOn: $configPrefaData.downloadRepackProperEpisodes) {
                         Text("Download REPACK•PROPER Episodes")
                     }
-                    .onChange(of: downloadRepackProperEpisodes) { newBool in
+                    .onChange(of: configPrefaData.downloadRepackProperEpisodes) { newValue in
                         let prefs = [
-                            "rss_download_repack_proper_episodes": newBool
+                            "rss_download_repack_proper_episodes": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                 }
@@ -73,19 +62,5 @@ struct RSSPrefsView: View {
         }
         .navigationTitle("RSS")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            Task {
-                await fetchPreferences()
-            }
-        }
-    }
-    
-    // Functions
-    
-    func fetchPreferences() async {
-        let preferences = await TorrentService.shared.getPreferences()
-        fetchRSSFeeds = preferences!.isRSSProcessingEnabled
-        autoDownloadRSSTorrents = preferences!.isRSSAutoDownloadingEnabled
-        downloadRepackProperEpisodes = preferences!.isRSSDownloadRepackProperEpisodes
     }
 }

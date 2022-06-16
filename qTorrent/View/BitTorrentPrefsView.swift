@@ -8,72 +8,57 @@
 import SwiftUI
 
 struct BitTorrentPrefsView: View {
-    @State var enableDHT = true
-    @State var enablePeX = true
-    @State var enableLSD = true
-    @State var anonymousMode = false
+    @EnvironmentObject var configPrefaData: ConfigPrefsViewModel
     
     var body: some View {
         VStack {
             List {
                 Section(header: Text("PRIVACY")) {
-                    Toggle(isOn: $enableDHT) {
+                    Toggle(isOn: $configPrefaData.enableDHT) {
                         Text("Decentralized Network (DHT)")
                     }
-                    .onChange(of: enableDHT) { newBool in
+                    .onChange(of: configPrefaData.enableDHT) { newValue in
                         let prefs = [
-                            "dht": newBool
+                            "dht": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                     
-                    Toggle(isOn: $enablePeX) {
+                    Toggle(isOn: $configPrefaData.enablePeX) {
                         Text("Peer Exchange (PeX)")
                     }
-                    .onChange(of: enablePeX) { newBool in
+                    .onChange(of: configPrefaData.enablePeX) { newValue in
                         let prefs = [
-                            "pex": newBool
+                            "pex": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                     
-                    Toggle(isOn: $enableLSD) {
+                    Toggle(isOn: $configPrefaData.enableLSD) {
                         Text("Local Peer Discovery (LSD)")
                     }
-                    .onChange(of: enableLSD) { newBool in
+                    .onChange(of: configPrefaData.enableLSD) { newValue in
                         let prefs = [
-                            "lsd": newBool
+                            "lsd": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                     
-                    Toggle(isOn: $anonymousMode) {
+                    Toggle(isOn: $configPrefaData.anonymousMode) {
                         Text("Anonymous Mode")
                     }
-                    .onChange(of: anonymousMode) { newBool in
+                    .onChange(of: configPrefaData.anonymousMode) { newValue in
                         let prefs = [
-                            "anonymous_mode": newBool
+                            "anonymous_mode": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                 }
@@ -81,20 +66,5 @@ struct BitTorrentPrefsView: View {
         }
         .navigationTitle("BitTorrent")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            Task {
-                await fetchPreferences()
-            }
-        }
-    }
-    
-    // Functions
-    
-    func fetchPreferences() async {
-        let preferences = await TorrentService.shared.getPreferences()
-        enableDHT = preferences!.isDHT
-        enablePeX = preferences!.isPeX
-        enableLSD = preferences!.isLSD
-        anonymousMode = preferences!.isAnonymousMode
     }
 }

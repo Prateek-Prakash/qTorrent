@@ -8,56 +8,45 @@
 import SwiftUI
 
 struct WebUIPrefsView: View {
-    @State var clickjackingProtection = true
-    @State var csrfProtection = true
-    @State var hostHeaderValidation = true
+    @EnvironmentObject var configPrefaData: ConfigPrefsViewModel
     
     var body: some View {
         VStack {
             List {
                 Section(header: Text("SECURITY")) {
-                    Toggle(isOn: $clickjackingProtection) {
+                    Toggle(isOn: $configPrefaData.clickjackingProtection) {
                         Text("Clickjacking Protection")
                     }
-                    .onChange(of: clickjackingProtection) { newBool in
+                    .onChange(of: configPrefaData.clickjackingProtection) { newValue in
                         let prefs = [
-                            "web_ui_clickjacking_protection_enabled": newBool
+                            "web_ui_clickjacking_protection_enabled": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                     
-                    Toggle(isOn: $csrfProtection) {
+                    Toggle(isOn: $configPrefaData.csrfProtection) {
                         Text("CSRF Protection")
                     }
-                    .onChange(of: csrfProtection) { newBool in
+                    .onChange(of: configPrefaData.csrfProtection) { newValue in
                         let prefs = [
-                            "web_ui_csrf_protection_enabled": newBool
+                            "web_ui_csrf_protection_enabled": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                     
-                    Toggle(isOn: $hostHeaderValidation) {
+                    Toggle(isOn: $configPrefaData.hostHeaderValidation) {
                         Text("Host Header Validation")
                     }
-                    .onChange(of: hostHeaderValidation) { newBool in
+                    .onChange(of: configPrefaData.hostHeaderValidation) { newValue in
                         let prefs = [
-                            "web_ui_host_header_validation_enabled": newBool
+                            "web_ui_host_header_validation_enabled": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                 }
@@ -65,19 +54,5 @@ struct WebUIPrefsView: View {
         }
         .navigationTitle("Web UI")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            Task {
-                await fetchPreferences()
-            }
-        }
-    }
-    
-    // Functions
-    
-    func fetchPreferences() async {
-        let preferences = await TorrentService.shared.getPreferences()
-        clickjackingProtection = preferences!.isWebUIClickjackingProtectionEnabled
-        csrfProtection = preferences!.isWebUICSRFProtectionEnabled
-        hostHeaderValidation = preferences!.isWebUIHostHeaderValidationEnabled
     }
 }

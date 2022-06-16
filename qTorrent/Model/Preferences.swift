@@ -57,7 +57,7 @@ struct Preferences: Identifiable, Codable {
     var maxUploadsPerTorrent: Int?
     var stopTrackerTimeout: Int?
     var isEnablePieceExtentAffinity: Bool
-    var bittorrentProtocol: Int?
+    var bitTorrentProtocol: Int
     var isLimitUTPRate: Bool
     var isLimitTCPOverhead: Bool
     var isLimitLANPeers: Bool
@@ -206,7 +206,7 @@ struct Preferences: Identifiable, Codable {
         case maxUploadsPerTorrent = "max_uploads_per_torrent"
         case stopTrackerTimeout = "stop_tracker_timeout"
         case isEnablePieceExtentAffinity = "enable_piece_extent_affinity"
-        case bittorrentProtocol = "bittorrent_protocol"
+        case bitTorrentProtocol = "bittorrent_protocol"
         case isLimitUTPRate = "limit_utp_rate"
         case isLimitTCPOverhead = "limit_tcp_overhead"
         case isLimitLANPeers = "limit_lan_peers"

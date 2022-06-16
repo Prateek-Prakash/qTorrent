@@ -34,7 +34,7 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink(destination: DeferView {
-                        ConfigPrefsView()
+                        ConfigPrefsView().environmentObject(ConfigPrefsViewModel())
                     }) {
                         Label("Configuration", systemImage: "gearshape.2.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemGray), size: 1))
                     }

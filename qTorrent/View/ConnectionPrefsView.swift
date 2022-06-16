@@ -5,16 +5,25 @@
 //  Created by Prateek Prakash on 5/29/22.
 //
 
+import BetterListPicker
 import SwiftUI
 
 struct ConnectionPrefsView: View {
-    
+    @EnvironmentObject var configPrefaData: ConfigPrefsViewModel
     
     var body: some View {
         VStack {
             List {
                 Section {
-                    Text("Peer Connection Protocol").badge("TCP & μTP")
+                    BetterListPicker("Peer Connection Protocol", selection: $configPrefaData.bitTorrentProtocol, pickerData: BitTorrentProtocol.allCases)
+                        .onChange(of: configPrefaData.bitTorrentProtocol) { newValue in
+                            let prefs = [
+                                "bittorrent_protocol": newValue.indexValue
+                            ]
+                            Task {
+                                await configPrefaData.updatePreferences(prefs)
+                            }
+                        }
                 }
                 
                 Section(header: Text("LISTENTING PORT")) {

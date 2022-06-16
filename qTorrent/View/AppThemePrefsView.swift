@@ -17,7 +17,7 @@ struct AppThemePrefsView: View {
                 Section {
                     ForEach(appThemeOptions, id: \.self) { appThemeOption in
                         Button(action: {
-                            appTheme = AppTheme.init(rawValue: appThemeOption)!
+                            appTheme = AppTheme(rawValue: appThemeOption)!
                         }) {
                             Text(appThemeOption).badge(
                                 Text("\(Image(systemName: appTheme.rawValue == appThemeOption ? "checkmark.circle.fill" : "circle"))")

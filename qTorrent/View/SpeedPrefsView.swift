@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct SpeedPrefsView: View {
-    @State var limitUTP = true
-    @State var limitTCPOverhead = false
-    @State var limitLANPeers = true
+    @EnvironmentObject var configPrefaData: ConfigPrefsViewModel
     
     var body: some View {
         VStack {
@@ -26,48 +24,39 @@ struct SpeedPrefsView: View {
                 }
                 
                 Section(header: Text("RATE LIMITS SETTINGS")) {
-                    Toggle(isOn: $limitUTP) {
+                    Toggle(isOn: $configPrefaData.limitUTP) {
                         Text("Apply Limit To μTP")
                     }
-                    .onChange(of: limitUTP) { newBool in
+                    .onChange(of: configPrefaData.limitUTP) { newValue in
                         let prefs = [
-                            "limit_utp_rate": newBool
+                            "limit_utp_rate": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                     
-                    Toggle(isOn: $limitTCPOverhead) {
+                    Toggle(isOn: $configPrefaData.limitTCPOverhead) {
                         Text("Apply Limit To TCP Overhead")
                     }
-                    .onChange(of: limitTCPOverhead) { newBool in
+                    .onChange(of: configPrefaData.limitTCPOverhead) { newValue in
                         let prefs = [
-                            "limit_tcp_overhead": newBool
+                            "limit_tcp_overhead": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                     
-                    Toggle(isOn: $limitLANPeers) {
+                    Toggle(isOn: $configPrefaData.limitLANPeers) {
                         Text("Apply Limit To Peers On LAN")
                     }
-                    .onChange(of: limitLANPeers) { newBool in
+                    .onChange(of: configPrefaData.limitLANPeers) { newValue in
                         let prefs = [
-                            "limit_lan_peers": newBool
+                            "limit_lan_peers": newValue
                         ]
-                        let json = try? JSONSerialization.data(withJSONObject: prefs)
-                        let string = String(data: json!, encoding: String.Encoding.ascii)
                         Task {
-                            await TorrentService.shared.setPreferences(string!)
-                            await fetchPreferences()
+                            await configPrefaData.updatePreferences(prefs)
                         }
                     }
                 }
@@ -75,19 +64,5 @@ struct SpeedPrefsView: View {
         }
         .navigationTitle("Speed")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            Task {
-                await fetchPreferences()
-            }
-        }
-    }
-    
-    // Functions
-    
-    func fetchPreferences() async {
-        let preferences = await TorrentService.shared.getPreferences()
-        limitUTP = preferences!.isLimitUTPRate
-        limitTCPOverhead = preferences!.isLimitTCPOverhead
-        limitLANPeers = preferences!.isLimitLANPeers
     }
 }
