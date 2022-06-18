@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AuthPrefsView: View {
-    @AppStorage("baseUrl") private var baseUrl = ""
+    @AppStorage("remoteUrl") private var remoteUrl = ""
     @AppStorage("remoteUsername") private var remoteUsername = ""
     @AppStorage("remotePassword") private var remotePassword = ""
     
@@ -16,8 +16,8 @@ struct AuthPrefsView: View {
         VStack {
             List {
                 Section(header: Text("REMOTE API")) {
-                    TextField("API Base URL", text: $baseUrl)
-                        .modifier(TextFieldClearModifier(text: $baseUrl))
+                    TextField("API Base URL", text: $remoteUrl)
+                        .modifier(TextFieldClearModifier(text: $remoteUrl))
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                 }

@@ -42,6 +42,7 @@
 		6E794975285DBC1A00F74233 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 6E794974285DBC1A00F74233 /* FirebaseMessaging */; };
 		6E794977285DBC6200F74233 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E794976285DBC6200F74233 /* GoogleService-Info.plist */; };
 		6E794979285DBD7800F74233 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E794978285DBD7800F74233 /* AppDelegate.swift */; };
+		6E79497C285E3F5E00F74233 /* NotifierService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E79497B285E3F5E00F74233 /* NotifierService.swift */; };
 		6EB327B72842AACB003CA9E3 /* qTorrentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB327B62842AACB003CA9E3 /* qTorrentApp.swift */; };
 		6EB327B92842AACB003CA9E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB327B82842AACB003CA9E3 /* ContentView.swift */; };
 		6EB327BB2842AACB003CA9E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EB327BA2842AACB003CA9E3 /* Assets.xcassets */; };
@@ -87,6 +88,7 @@
 		6E794976285DBC6200F74233 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E794978285DBD7800F74233 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E79497A285DC06600F74233 /* qTorrent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = qTorrent.entitlements; sourceTree = "<group>"; };
+		6E79497B285E3F5E00F74233 /* NotifierService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifierService.swift; sourceTree = "<group>"; };
 		6EB327B32842AACB003CA9E3 /* qTorrent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qTorrent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB327B62842AACB003CA9E3 /* qTorrentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qTorrentApp.swift; sourceTree = "<group>"; };
 		6EB327B82842AACB003CA9E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				6E2264DE2842D111005FB27F /* TorrentService.swift */,
+				6E79497B285E3F5E00F74233 /* NotifierService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				6E79496E285D669800F74233 /* NotificationsPrefsView.swift in Sources */,
 				6E2264C92842BD57005FB27F /* TorrentsView.swift in Sources */,
 				6E2264D42842C2C2005FB27F /* AppTheme.swift in Sources */,
+				6E79497C285E3F5E00F74233 /* NotifierService.swift in Sources */,
 				6E2264D82842C481005FB27F /* AuthPrefsView.swift in Sources */,
 				6E2264F228432BD3005FB27F /* DownloadsPrefsView.swift in Sources */,
 				6E2264F828432C5E005FB27F /* BitTorrentPrefsView.swift in Sources */,

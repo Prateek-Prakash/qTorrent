@@ -9,7 +9,7 @@ import Alamofire
 import SwiftUI
 
 class TorrentService {
-    @AppStorage("baseUrl") private var baseUrl = ""
+    @AppStorage("remoteUrl") private var remoteUrl = ""
     @AppStorage("remoteUsername") private var remoteUsername = ""
     @AppStorage("remotePassword") private var remotePassword = ""
     
@@ -23,7 +23,7 @@ class TorrentService {
                 "username": remoteUsername,
                 "password": remotePassword
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/auth/login", parameters: params).serializingString().value
+            let value = try await AF.request("\(remoteUrl)/api/v2/auth/login", parameters: params).serializingString().value
             return value == "Ok."
         } catch {
             return nil
@@ -32,7 +32,7 @@ class TorrentService {
     
     public func logout() async -> Bool? {
         do {
-            let value = try await AF.request("\(baseUrl)/api/v2/auth/logout").serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/auth/logout").serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -46,7 +46,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "filter": "all"
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/torrents/info", parameters: params).serializingDecodable([Torrent]?.self).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/torrents/info", parameters: params).serializingDecodable([Torrent]?.self).value
             return value
         } catch {
             return nil
@@ -58,7 +58,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "hashes": hashes.joined(separator: "|")
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/torrents/pause", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/torrents/pause", parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -70,7 +70,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "hashes": hashes.joined(separator: "|")
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/torrents/resume", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/torrents/resume", parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -82,7 +82,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "hash": hash
             ]
-            let values = try await AF.request("\(baseUrl)/api/v2/torrents/pieceStates", parameters: params).serializingDecodable([Int]?.self).value
+            let values = try await AF.request("\(remoteUrl)/api/v2/torrents/pieceStates", parameters: params).serializingDecodable([Int]?.self).value
             var pieces: [Piece] = []
             for val in values! {
                 pieces.append(Piece(id: UUID(), value: val))
@@ -102,7 +102,7 @@ class TorrentService {
                 for (key, value) in params {
                     multiFormData.append(Data(value.utf8), withName: key)
                 }
-            }, to: "\(baseUrl)/api/v2/torrents/add").serializingString().value
+            }, to: "\(remoteUrl)/api/v2/torrents/add").serializingString().value
             return value == "Ok."
         } catch {
             return nil
@@ -120,7 +120,7 @@ class TorrentService {
                 "critical": true,
                 "last_known_id": -1
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/log/main", parameters: params).serializingDecodable([MainLog]?.self).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/log/main", parameters: params).serializingDecodable([MainLog]?.self).value
             return value
         } catch {
             return nil
@@ -132,7 +132,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "last_known_id": -1
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/log/peers", parameters: params).serializingDecodable([PeerLog]?.self).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/log/peers", parameters: params).serializingDecodable([PeerLog]?.self).value
             return value
         } catch {
             return nil
@@ -143,7 +143,7 @@ class TorrentService {
     
     public func getPreferences() async -> Preferences? {
         do {
-            let value = try await AF.request("\(baseUrl)/api/v2/app/preferences").serializingDecodable(Preferences?.self).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/app/preferences").serializingDecodable(Preferences?.self).value
             return value
         } catch {
             return nil
@@ -155,7 +155,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "json": json
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/app/setPreferences", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/app/setPreferences", parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -166,7 +166,7 @@ class TorrentService {
     
     public func getSpeedLimitsMode() async -> Bool? {
         do {
-            let value = try await AF.request("\(baseUrl)/api/v2/transfer/speedLimitsMode").serializingString().value
+            let value = try await AF.request("\(remoteUrl)/api/v2/transfer/speedLimitsMode").serializingString().value
             return value == "1"
         } catch {
             return nil
@@ -175,7 +175,7 @@ class TorrentService {
     
     public func toggleSpeedLimitsMode() async -> Bool? {
         do {
-            let value = try await AF.request("\(baseUrl)/api/v2/transfer/toggleSpeedLimitsMode").serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/transfer/toggleSpeedLimitsMode").serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -186,7 +186,7 @@ class TorrentService {
     
     public func getPlugins() async -> [Plugin]? {
         do {
-            let value = try await AF.request("\(baseUrl)/api/v2/search/plugins").serializingDecodable([Plugin]?.self).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/search/plugins").serializingDecodable([Plugin]?.self).value
             return value
         } catch {
             return nil
@@ -199,7 +199,7 @@ class TorrentService {
                 "names": names.joined(separator: "|"),
                 "enable": String(enable)
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/search/enablePlugin", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/search/enablePlugin", parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -213,7 +213,7 @@ class TorrentService {
                 "plugins": "all",
                 "category": "all"
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/search/start", parameters: params).serializingDecodable(StartSearch?.self).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/search/start", parameters: params).serializingDecodable(StartSearch?.self).value
             return value
         } catch {
             return nil
@@ -225,7 +225,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "id": id
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/search/stop", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/search/stop", parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -237,7 +237,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "id": id
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/search/delete", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/search/delete", parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -249,7 +249,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "id": id
             ]
-            let value = try await AF.request("\(baseUrl)/api/v2/search/results", parameters: params).serializingDecodable(SearchResults?.self).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/search/results", parameters: params).serializingDecodable(SearchResults?.self).value
             return value
         } catch {
             return nil
