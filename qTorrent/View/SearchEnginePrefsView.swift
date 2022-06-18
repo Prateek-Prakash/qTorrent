@@ -1,5 +1,5 @@
 //
-//  PluginsPrefsView.swift
+//  SearchEnginePrefsView.swift
 //  qTorrent
 //
 //  Created by Prateek Prakash on 6/3/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PluginsPrefsView: View {
+struct SearchEnginePrefsView: View {
     @State var completeList: [Plugin] = []
     
     var body: some View {
@@ -17,16 +17,16 @@ struct PluginsPrefsView: View {
                     Toggle(isOn: $completeList[pluginIndex].enabled) {
                         Text(completeList[pluginIndex].fullName)
                     }
-                    .onChange(of: completeList[pluginIndex].enabled) { newBool in
+                    .onChange(of: completeList[pluginIndex].enabled) { newValue in
                         Task {
-                            await TorrentService.shared.togglePlugins([completeList[pluginIndex].name], newBool)
+                            await TorrentService.shared.togglePlugins([completeList[pluginIndex].name], newValue)
                             await fetchPlugins()
                         }
                     }
                 }
             }
         }
-        .navigationTitle("Search Plugins")
+        .navigationTitle("Search Engine")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             Task {

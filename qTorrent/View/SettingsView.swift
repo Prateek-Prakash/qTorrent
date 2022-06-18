@@ -28,9 +28,9 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink(destination: DeferView {
-                        PluginsPrefsView()
+                        SearchEnginePrefsView()
                     }) {
-                        Label("Search Plugins", systemImage: "magnifyingglass").labelStyle(ColorfulIconLabelStyle(color: Color(.systemPurple), size: 1))
+                        Label("Search Engine", systemImage: "magnifyingglass").labelStyle(ColorfulIconLabelStyle(color: Color(.systemPurple), size: 1))
                     }
                     
                     NavigationLink(destination: DeferView {
