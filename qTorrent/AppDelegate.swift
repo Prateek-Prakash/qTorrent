@@ -10,6 +10,9 @@ import FirebaseMessaging
 import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    @AppStorage("allowNotifications") private var allowNotifications = true
+    @AppStorage("cloudMessagingToken") private var cloudMessagingToken = ""
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
         FirebaseConfiguration.shared.setLoggerLevel(.min)
@@ -42,6 +45,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         debugPrint("FCM Token: \(fcmToken!)")
+        cloudMessagingToken = fcmToken!
         
         let tokenDict = [
             "token": fcmToken ?? ""
@@ -49,7 +53,9 @@ extension AppDelegate: MessagingDelegate {
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: tokenDict)
         
         Task {
-            await NotifierService.shared.registerToken(fcmToken!)
+            if allowNotifications {
+                await NotifierService.shared.registerToken()
+            }
         }
     }
 }
