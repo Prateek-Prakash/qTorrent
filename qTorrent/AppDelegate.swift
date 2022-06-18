@@ -41,7 +41,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        let tokenDict = ["token": fcmToken ?? ""]
+        debugPrint("FCM Token: \(fcmToken!)")
+        let tokenDict = [
+            "token": fcmToken ?? ""
+        ]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: tokenDict)
     }
 }
