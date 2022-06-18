@@ -14,11 +14,11 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("REMOTE CLIENT")) {
+                Section(header: Text("QBITTORRENT")) {
                     NavigationLink(destination: DeferView {
                         AuthPrefsView()
                     }) {
-                        Label("Authentication", systemImage: "lock.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemPink), size: 1))
+                        Label("Authentication", systemImage: "lock.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemTeal), size: 1))
                     }
                     
                     NavigationLink(destination: DeferView {
@@ -40,11 +40,17 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section(header: Text("CUSTOMIZATION")) {
+                Section(header: Text("QTORRENT")) {
                     BetterListPicker($appTheme, pickerData: AppTheme.allCases) {
                         Text("App Theme")
                     } label: {
                         Label("App Theme", systemImage: "paintbrush.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemIndigo), size: 1))
+                    }
+                    
+                    NavigationLink(destination: DeferView {
+                        NotificationsPrefsView()
+                    }) {
+                        Label("Notifications", systemImage: "bell.badge.fill").labelStyle(ColorfulIconLabelStyle(color: Color(.systemRed), size: 1))
                     }
                 }
             }
