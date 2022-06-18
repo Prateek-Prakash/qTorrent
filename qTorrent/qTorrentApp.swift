@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct qTorrentApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     @AppStorage("appTheme") var appTheme: AppTheme = .system
     
     var body: some Scene {
