@@ -31,7 +31,6 @@ struct PieceMapView: View {
             .navigationTitle("Piece Map")
             .navigationBarTitleDisplayMode(.inline)
         }
-        
         .onAppear {
             Task {
                 await fetchPieceStates()
