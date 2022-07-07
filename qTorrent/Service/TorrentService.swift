@@ -109,6 +109,18 @@ class TorrentService {
         }
     }
     
+    public func getContentFiles(_ hash: String) async -> [ContentFile]? {
+        do {
+            let params: [String: Any] = [
+                "hash": hash
+            ]
+            let values = try await AF.request("\(remoteUrl)/api/v2/torrents/files", parameters: params).serializingDecodable([ContentFile]?.self).value
+            return values
+        } catch {
+            return nil
+        }
+    }
+    
     // Logs
     
     public func getMainLogs() async -> [MainLog]? {
