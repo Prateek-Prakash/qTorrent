@@ -52,6 +52,7 @@
 		6EB8D041284AD8D400BABA69 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8D040284AD8D400BABA69 /* SearchResults.swift */; };
 		6EB8D043284AD9D100BABA69 /* TorrentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8D042284AD9D100BABA69 /* TorrentResult.swift */; };
 		6ECB80C428766A3D009D0BB6 /* ContentFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECB80C328766A3D009D0BB6 /* ContentFile.swift */; };
+		6ECB80C628767327009D0BB6 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECB80C528767327009D0BB6 /* DetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		6EB8D040284AD8D400BABA69 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		6EB8D042284AD9D100BABA69 /* TorrentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentResult.swift; sourceTree = "<group>"; };
 		6ECB80C328766A3D009D0BB6 /* ContentFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFile.swift; sourceTree = "<group>"; };
+		6ECB80C528767327009D0BB6 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				6EB327B82842AACB003CA9E3 /* ContentView.swift */,
 				6E2264CE2842C283005FB27F /* DeferView.swift */,
 				6E2264C82842BD57005FB27F /* TorrentsView.swift */,
+				6ECB80C528767327009D0BB6 /* DetailsView.swift */,
 				6EB8D03A284ABE1100BABA69 /* PieceMapView.swift */,
 				6E39A48D284A3507004C71B3 /* SearchView.swift */,
 				6E2264CA2842BD62005FB27F /* SettingsView.swift */,
@@ -339,6 +342,7 @@
 				6EB8D03F284AD75900BABA69 /* StartSearch.swift in Sources */,
 				6E79496E285D669800F74233 /* NotificationsPrefsView.swift in Sources */,
 				6E2264C92842BD57005FB27F /* TorrentsView.swift in Sources */,
+				6ECB80C628767327009D0BB6 /* DetailsView.swift in Sources */,
 				6E2264D42842C2C2005FB27F /* AppTheme.swift in Sources */,
 				6E79497C285E3F5E00F74233 /* NotifierService.swift in Sources */,
 				6E2264D82842C481005FB27F /* AuthPrefsView.swift in Sources */,

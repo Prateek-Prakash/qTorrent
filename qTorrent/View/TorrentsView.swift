@@ -106,7 +106,7 @@ struct TorrentsView: View {
                                     Spacer()
                                     
                                     NavigationLink(destination: DeferView {
-                                        PieceMapView(torrentHash: torrent.hash)
+                                        DetailsView(torrentHash: torrent.hash)
                                     }) {
                                         Image(systemName: "chevron.right")
                                             .resizable()
@@ -201,6 +201,7 @@ struct TorrentsView: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             Task {
                 await fetchTorrents()
