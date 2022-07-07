@@ -14,6 +14,12 @@ struct DetailsView: View {
         VStack {
             List {
                 NavigationLink(destination: DeferView {
+                    ContentView(torrentHash: torrentHash)
+                }) {
+                    Text("Content")
+                }
+                
+                NavigationLink(destination: DeferView {
                     PieceMapView(torrentHash: torrentHash)
                 }) {
                     Text("Piece Map")
