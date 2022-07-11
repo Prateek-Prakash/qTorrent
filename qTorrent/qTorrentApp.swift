@@ -17,6 +17,9 @@ struct qTorrentApp: App {
         WindowGroup {
             MainView()
                 .preferredColorScheme(appTheme.colorScheme)
+                .onAppear {
+                    UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+                }
         }
     }
 }
