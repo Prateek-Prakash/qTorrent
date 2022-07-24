@@ -11,19 +11,6 @@ struct MainView: View {
     @AppStorage("searchId") private var searchId = -1
     
     init() {
-        // Rounded NavigationBar Title
-        var titleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
-        titleFont = UIFont(
-            descriptor:
-                titleFont.fontDescriptor
-                .withDesign(.rounded)?
-                .withSymbolicTraits(.traitBold)
-            ??
-            titleFont.fontDescriptor,
-            size: titleFont.pointSize
-        )
-        UINavigationBar.appearance().largeTitleTextAttributes = [.font: titleFont]
-        
         // Translucent TabBar
         UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance()
         
