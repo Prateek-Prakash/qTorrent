@@ -156,7 +156,7 @@ struct TorrentsView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
-                        Picker(selection: $selectedState, label: Text("Sorting options")) {
+                        Picker(selection: $selectedState, label: Text("Sorting Options")) {
                             HStack {
                                 Text("All")
                                 Image(systemName: "circle.hexagongrid")
