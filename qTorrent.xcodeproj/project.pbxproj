@@ -172,6 +172,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		6E76F78828CFD2180039A6A4 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				6EB327B62842AACB003CA9E3 /* qTorrentApp.swift */,
+				6E794978285DBD7800F74233 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		6EB327AA2842AACB003CA9E3 = {
 			isa = PBXGroup;
 			children = (
@@ -195,8 +204,7 @@
 				6E79497A285DC06600F74233 /* qTorrent.entitlements */,
 				6EB327BA2842AACB003CA9E3 /* Assets.xcassets */,
 				6E794976285DBC6200F74233 /* GoogleService-Info.plist */,
-				6EB327B62842AACB003CA9E3 /* qTorrentApp.swift */,
-				6E794978285DBD7800F74233 /* AppDelegate.swift */,
+				6E76F78828CFD2180039A6A4 /* Application */,
 				6E2264D22842C2AD005FB27F /* Common */,
 				6E2264F028432A1A005FB27F /* Enumeration */,
 				6E2264E02842D138005FB27F /* Model */,
