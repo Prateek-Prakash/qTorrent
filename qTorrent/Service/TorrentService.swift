@@ -19,11 +19,15 @@ class TorrentService {
     
     public func login() async -> Bool? {
         do {
-            let params: [String: Any] = [
+            let params: [String: String] = [
                 "username": remoteUsername,
                 "password": remotePassword
             ]
-            let value = try await AF.request("\(remoteUrl)/api/v2/auth/login", parameters: params).serializingString().value
+            let value = try await AF.upload(multipartFormData: { multiFormData in
+                for (key, val) in params {
+                    multiFormData.append(Data(val.utf8), withName: key)
+                }
+            }, to: "\(remoteUrl)/api/v2/auth/login").serializingString().value
             return value == "Ok."
         } catch {
             return nil
@@ -99,8 +103,8 @@ class TorrentService {
                 "urls": url,
             ]
             let value = try await AF.upload(multipartFormData: { multiFormData in
-                for (key, value) in params {
-                    multiFormData.append(Data(value.utf8), withName: key)
+                for (key, val) in params {
+                    multiFormData.append(Data(val.utf8), withName: key)
                 }
             }, to: "\(remoteUrl)/api/v2/torrents/add").serializingString().value
             return value == "Ok."
