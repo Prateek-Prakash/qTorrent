@@ -1,0 +1,935 @@
+{
+	"info": {
+		"_postman_id": "0cac20aa-1bd0-4936-b79f-821a736c77f7",
+		"name": "qBittorrent",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "Teekzilla",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "0420848303",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/auth/login",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/auth/logout",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application",
+			"item": [
+				{
+					"name": "Version",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/app/version",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"app",
+								"version"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Version",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/app/webapiVersion",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"app",
+								"webapiVersion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Build Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/app/buildInfo",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"app",
+								"buildInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shutdown",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/app/shutdown",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"app",
+								"shutdown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Preferences",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/app/preferences",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"app",
+								"preferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Preferences",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/app/setPreferences?json={\"encryption\":0}",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"app",
+								"setPreferences"
+							],
+							"query": [
+								{
+									"key": "json",
+									"value": "{\"encryption\":0}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Default Save Path",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/app/defaultSavePath",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"app",
+								"defaultSavePath"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Log",
+			"item": [
+				{
+					"name": "Main Log",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/log/main?normal=true&info=true&warning=true&critical=true&last_known_id=-1",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"log",
+								"main"
+							],
+							"query": [
+								{
+									"key": "normal",
+									"value": "true"
+								},
+								{
+									"key": "info",
+									"value": "true"
+								},
+								{
+									"key": "warning",
+									"value": "true"
+								},
+								{
+									"key": "critical",
+									"value": "true"
+								},
+								{
+									"key": "last_known_id",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Peer Log",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/log/peers?last_known_id=-1",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"log",
+								"peers"
+							],
+							"query": [
+								{
+									"key": "last_known_id",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sync",
+			"item": [
+				{
+					"name": "Main Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/sync/maindata?rid=0",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"sync",
+								"maindata"
+							],
+							"query": [
+								{
+									"key": "rid",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Torrent Peers Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/sync/torrentPeers?hash=fe13ced15fc8b1651ab9ed0c8f72a5e6cd3f7aed&rid=0",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"sync",
+								"torrentPeers"
+							],
+							"query": [
+								{
+									"key": "hash",
+									"value": "fe13ced15fc8b1651ab9ed0c8f72a5e6cd3f7aed"
+								},
+								{
+									"key": "rid",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transfer Info",
+			"item": [
+				{
+					"name": "Transfer Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/transfer/info",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"transfer",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Speed Limits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/transfer/speedLimitsMode",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"transfer",
+								"speedLimitsMode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle Speed Limits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/transfer/toggleSpeedLimitsMode",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"transfer",
+								"toggleSpeedLimitsMode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download Limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/transfer/downloadLimit",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"transfer",
+								"downloadLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Download Limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/transfer/setDownloadLimit?limit=0",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"transfer",
+								"setDownloadLimit"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/transfer/uploadLimit",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"transfer",
+								"uploadLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Upload Limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/transfer/setUploadLimit?limit=0",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"transfer",
+								"setUploadLimit"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Torrents",
+			"item": [
+				{
+					"name": "Torrent List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/torrents/info?filter=all",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"torrents",
+								"info"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pause Torrent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/torrents/pause?hashes=b744a71e091e5e2b35b15bdef714f964cf09c31b",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"torrents",
+								"pause"
+							],
+							"query": [
+								{
+									"key": "hashes",
+									"value": "b744a71e091e5e2b35b15bdef714f964cf09c31b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resume Torrent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/torrents/resume?hashes=b744a71e091e5e2b35b15bdef714f964cf09c31b",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"torrents",
+								"resume"
+							],
+							"query": [
+								{
+									"key": "hashes",
+									"value": "b744a71e091e5e2b35b15bdef714f964cf09c31b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pieces States",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/torrents/pieceStates?hash=284b9055955069a426a8429e2c0dbcf56bb0a93e",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"torrents",
+								"pieceStates"
+							],
+							"query": [
+								{
+									"key": "hash",
+									"value": "284b9055955069a426a8429e2c0dbcf56bb0a93e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Torrent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "urls",
+									"value": "http://127.0.0.1:9117/dl/iptorrents/?jackett_apikey=nr2h1w5k02vaa3fls0vu5elbkjfeeikd&path=Q2ZESjhPSzZKcGtPVHdaTmduWkQxT28yQWo5cHVrUk44UEtOYWNlSmZ2aXVEdDU5bFE0Q2NiTHkyVGdyODFZZnppcWtyZTdnekZEdWZydFQwa1FDTHhUQzdKcjU5LWdNQzdMbVlmcTJPS21BMF9SeGVKOFFlZ01lam5KWWUxSllPYU5fazU0NU4zTlVaN3duZm5zZ0lWSXMxS21EWWJFMHcxZjViRTdfMzRXdnZnUkhuYjlGUVhtVnB0VHFaZzdsay1wLW5IcHVGVXBiSjNWMjZzQ0dYODJTUmlDTjlSd1F4aXNTSjFsampHSVlUQ3I0cDZSczBCbTFmbXdrSkw5RUh0cjBqdw&file=Silicon+Valley+S01+1080p+BluRay+H264+AC3+Will1869",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/torrents/add",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"torrents",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Torrent Files",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/torrents/files?hash=7498c50ce29d8070147344719e918e874eb1057e",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"torrents",
+								"files"
+							],
+							"query": [
+								{
+									"key": "hash",
+									"value": "7498c50ce29d8070147344719e918e874eb1057e"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Search Plugins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/search/plugins",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"search",
+								"plugins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle Plugin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/search/enablePlugin?names=eng_1337x&enable=true",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"search",
+								"enablePlugin"
+							],
+							"query": [
+								{
+									"key": "names",
+									"value": "eng_1337x"
+								},
+								{
+									"key": "enable",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/search/start?pattern=Silicon Valley S01 Will1869&plugins=all&category=all",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"search",
+								"start"
+							],
+							"query": [
+								{
+									"key": "pattern",
+									"value": "Silicon Valley S01 Will1869"
+								},
+								{
+									"key": "plugins",
+									"value": "all"
+								},
+								{
+									"key": "category",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stop Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/search/stop?id=213273788",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"search",
+								"stop"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "213273788"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/search/status?id=1235079238",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"search",
+								"status"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1235079238"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/search/results?id=1192973438",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"search",
+								"results"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1192973438"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{publicIp}}:8080/api/v2/search/delete?id=213273788",
+							"protocol": "http",
+							"host": [
+								"{{publicIp}}"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"search",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "213273788"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
