@@ -62,7 +62,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "hashes": hashes.joined(separator: "|")
             ]
-            let value = try await AF.request("\(remoteUrl)/api/v2/torrents/pause", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/torrents/pause", method: .post, parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -74,7 +74,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "hashes": hashes.joined(separator: "|")
             ]
-            let value = try await AF.request("\(remoteUrl)/api/v2/torrents/resume", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/torrents/resume", method: .post, parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil

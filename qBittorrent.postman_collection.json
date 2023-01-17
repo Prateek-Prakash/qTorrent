@@ -581,10 +581,20 @@
 				{
 					"name": "Pause Torrent",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "hashes",
+									"value": "ed5dcef5ad2b3b7e6fc56c110af69050c70b64ad",
+									"type": "default"
+								}
+							]
+						},
 						"url": {
-							"raw": "http://{{publicIp}}:8080/api/v2/torrents/pause?hashes=b744a71e091e5e2b35b15bdef714f964cf09c31b",
+							"raw": "http://{{publicIp}}:8080/api/v2/torrents/pause",
 							"protocol": "http",
 							"host": [
 								"{{publicIp}}"
@@ -595,12 +605,6 @@
 								"v2",
 								"torrents",
 								"pause"
-							],
-							"query": [
-								{
-									"key": "hashes",
-									"value": "b744a71e091e5e2b35b15bdef714f964cf09c31b"
-								}
 							]
 						}
 					},
@@ -609,10 +613,20 @@
 				{
 					"name": "Resume Torrent",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "hashes",
+									"value": "ed5dcef5ad2b3b7e6fc56c110af69050c70b64ad",
+									"type": "default"
+								}
+							]
+						},
 						"url": {
-							"raw": "http://{{publicIp}}:8080/api/v2/torrents/resume?hashes=b744a71e091e5e2b35b15bdef714f964cf09c31b",
+							"raw": "http://{{publicIp}}:8080/api/v2/torrents/resume",
 							"protocol": "http",
 							"host": [
 								"{{publicIp}}"
@@ -623,12 +637,6 @@
 								"v2",
 								"torrents",
 								"resume"
-							],
-							"query": [
-								{
-									"key": "hashes",
-									"value": "b744a71e091e5e2b35b15bdef714f964cf09c31b"
-								}
 							]
 						}
 					},
