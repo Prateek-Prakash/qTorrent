@@ -94,7 +94,6 @@ class ConfigPrefsViewModel: ObservableObject {
             self.resolvePeerCountrie = preferences.isResolvePeerCountries
             self.reannounceWhenAddressChanges = preferences.isReannounceWhenAddressChanged
             self.embeddedTracker = preferences.isEnableEmbeddedTracker
-            self.enableOSCache = preferences.isEnableOSCache
             self.coalesceReadsWrites = preferences.isEnableCoalesceReadWrite
             self.usePieceExtentAffinity = preferences.isEnablePieceExtentAffinity
             self.sendUploadPieceSuggestions = preferences.isEnableUploadSuggestions

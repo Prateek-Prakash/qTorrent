@@ -74,18 +74,6 @@ struct AdvancedPrefsView: View {
                     
                     Text("File Pool Size").badge("5000")
                     
-                    Toggle(isOn: $configPrefaData.enableOSCache) {
-                        Text("Enable OS Cache")
-                    }
-                    .onChange(of: configPrefaData.enableOSCache) { newValue in
-                        let prefs = [
-                            "enable_os_cache": newValue
-                        ]
-                        Task {
-                            await configPrefaData.updatePreferences(prefs)
-                        }
-                    }
-                    
                     Toggle(isOn: $configPrefaData.coalesceReadsWrites) {
                         Text("Coalesce Reads & Writes")
                     }

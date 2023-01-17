@@ -139,7 +139,6 @@ struct Preferences: Identifiable, Codable {
     var isEnableCoalesceReadWrite: Bool
     var isEnableEmbeddedTracker: Bool
     var isEnableMultiConnectionsFromSameIP: Bool?
-    var isEnableOSCache: Bool
     var isEnableUploadSuggestions: Bool
     var filePoolSize: Int?
     var outgoingPortsMax: Int?
@@ -288,7 +287,6 @@ struct Preferences: Identifiable, Codable {
         case isEnableCoalesceReadWrite = "enable_coalesce_read_write"
         case isEnableEmbeddedTracker = "enable_embedded_tracker"
         case isEnableMultiConnectionsFromSameIP = "enable_multi_connections_from_same_ip"
-        case isEnableOSCache = "enable_os_cache"
         case isEnableUploadSuggestions = "enable_upload_suggestions"
         case filePoolSize = "file_pool_size"
         case outgoingPortsMax = "outgoing_ports_max"

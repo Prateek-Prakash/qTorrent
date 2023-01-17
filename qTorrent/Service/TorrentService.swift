@@ -162,6 +162,7 @@ class TorrentService {
             let value = try await AF.request("\(remoteUrl)/api/v2/app/preferences").serializingDecodable(Preferences?.self).value
             return value
         } catch {
+            print(error)
             return nil
         }
     }
