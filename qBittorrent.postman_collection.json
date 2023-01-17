@@ -404,10 +404,10 @@
 				{
 					"name": "Speed Limits",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{publicIp}}:8080/api/v2/transfer/toggleSpeedLimitsMode",
+							"raw": "http://{{publicIp}}:8080/api/v2/transfer/speedLimitsMode",
 							"protocol": "http",
 							"host": [
 								"{{publicIp}}"
@@ -417,7 +417,7 @@
 								"api",
 								"v2",
 								"transfer",
-								"toggleSpeedLimitsMode"
+								"speedLimitsMode"
 							]
 						}
 					},
@@ -426,7 +426,7 @@
 				{
 					"name": "Toggle Speed Limits",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"url": {
 							"raw": "http://{{publicIp}}:8080/api/v2/transfer/toggleSpeedLimitsMode",
