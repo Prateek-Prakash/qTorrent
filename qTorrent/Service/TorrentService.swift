@@ -191,7 +191,7 @@ class TorrentService {
     
     public func toggleSpeedLimitsMode() async -> Bool? {
         do {
-            let value = try await AF.request("\(remoteUrl)/api/v2/transfer/toggleSpeedLimitsMode").serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/transfer/toggleSpeedLimitsMode", method: .post).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
