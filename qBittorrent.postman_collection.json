@@ -792,10 +792,30 @@
 				{
 					"name": "Start Search",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "pattern",
+									"value": "Silicon Valley S01 Will1869",
+									"type": "text"
+								},
+								{
+									"key": "plugins",
+									"value": "all",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "all",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "http://{{publicIp}}:8080/api/v2/search/start?pattern=Silicon Valley S01 Will1869&plugins=all&category=all",
+							"raw": "http://{{publicIp}}:8080/api/v2/search/start",
 							"protocol": "http",
 							"host": [
 								"{{publicIp}}"
@@ -806,20 +826,6 @@
 								"v2",
 								"search",
 								"start"
-							],
-							"query": [
-								{
-									"key": "pattern",
-									"value": "Silicon Valley S01 Will1869"
-								},
-								{
-									"key": "plugins",
-									"value": "all"
-								},
-								{
-									"key": "category",
-									"value": "all"
-								}
 							]
 						}
 					},
@@ -828,10 +834,20 @@
 				{
 					"name": "Stop Search",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "2036690959",
+									"type": "default"
+								}
+							]
+						},
 						"url": {
-							"raw": "http://{{publicIp}}:8080/api/v2/search/stop?id=213273788",
+							"raw": "http://{{publicIp}}:8080/api/v2/search/stop",
 							"protocol": "http",
 							"host": [
 								"{{publicIp}}"
@@ -842,12 +858,6 @@
 								"v2",
 								"search",
 								"stop"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "213273788"
-								}
 							]
 						}
 					},
@@ -856,10 +866,20 @@
 				{
 					"name": "Search Status",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "2036690959",
+									"type": "default"
+								}
+							]
+						},
 						"url": {
-							"raw": "http://{{publicIp}}:8080/api/v2/search/status?id=1235079238",
+							"raw": "http://{{publicIp}}:8080/api/v2/search/status",
 							"protocol": "http",
 							"host": [
 								"{{publicIp}}"
@@ -870,12 +890,6 @@
 								"v2",
 								"search",
 								"status"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1235079238"
-								}
 							]
 						}
 					},
@@ -887,7 +901,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{publicIp}}:8080/api/v2/search/results?id=1192973438",
+							"raw": "http://{{publicIp}}:8080/api/v2/search/results?id=480034465",
 							"protocol": "http",
 							"host": [
 								"{{publicIp}}"
@@ -902,7 +916,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "1192973438"
+									"value": "480034465"
 								}
 							]
 						}
@@ -912,10 +926,20 @@
 				{
 					"name": "Delete Search",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "2036690959",
+									"type": "default"
+								}
+							]
+						},
 						"url": {
-							"raw": "http://{{publicIp}}:8080/api/v2/search/delete?id=213273788",
+							"raw": "http://{{publicIp}}:8080/api/v2/search/delete",
 							"protocol": "http",
 							"host": [
 								"{{publicIp}}"
@@ -926,12 +950,6 @@
 								"v2",
 								"search",
 								"delete"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "213273788"
-								}
 							]
 						}
 					},

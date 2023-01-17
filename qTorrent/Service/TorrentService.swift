@@ -74,7 +74,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "hashes": hashes.joined(separator: "|")
             ]
-            let value = try await AF.request("\(remoteUrl)/api/v2/torrents/resume", method: .post, parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/torrents/resume", method: .post,parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -229,7 +229,7 @@ class TorrentService {
                 "plugins": "all",
                 "category": "all"
             ]
-            let value = try await AF.request("\(remoteUrl)/api/v2/search/start", parameters: params).serializingDecodable(StartSearch?.self).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/search/start", method: .post, parameters: params).serializingDecodable(StartSearch?.self).value
             return value
         } catch {
             return nil
@@ -241,7 +241,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "id": id
             ]
-            let value = try await AF.request("\(remoteUrl)/api/v2/search/stop", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/search/stop", method: .post, parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
@@ -253,7 +253,7 @@ class TorrentService {
             let params: [String: Any] = [
                 "id": id
             ]
-            let value = try await AF.request("\(remoteUrl)/api/v2/search/delete", parameters: params).serializingString(emptyResponseCodes: [200]).value
+            let value = try await AF.request("\(remoteUrl)/api/v2/search/delete", method: .post, parameters: params).serializingString(emptyResponseCodes: [200]).value
             return value.isEmpty
         } catch {
             return nil
