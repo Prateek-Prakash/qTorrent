@@ -26,7 +26,7 @@ struct MainLog: Identifiable, Codable {
             return "NORMAL"
         case 2:
             return "INFO"
-        case 3:
+        case 4:
             return "WARNING"
         case 8:
             return "CRITICAL"
@@ -40,8 +40,8 @@ struct MainLog: Identifiable, Codable {
         case 1:
             return nil
         case 2:
-            return nil
-        case 3:
+            return Color(.systemBlue)
+        case 4:
             return Color(.systemYellow)
         case 8:
             return Color(.systemRed)

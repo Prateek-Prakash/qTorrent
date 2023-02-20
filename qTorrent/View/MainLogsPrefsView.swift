@@ -11,7 +11,7 @@ struct MainLogsPrefsView: View {
     @State var completeList: [MainLog]? = []
     @State var filteredList: [MainLog]? = []
     
-    @State var displayTypes = [ 1, 2, 3, 8 ]
+    @State var displayTypes = [ 1, 2, 4, 8 ]
     
     let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -79,14 +79,14 @@ struct MainLogsPrefsView: View {
                     }
                     
                     Button {
-                        if displayTypes.contains(3) {
-                            displayTypes.remove(at: displayTypes.firstIndex(of: 3)!)
+                        if displayTypes.contains(4) {
+                            displayTypes.remove(at: displayTypes.firstIndex(of: 4)!)
                         } else {
-                            displayTypes.append(3)
+                            displayTypes.append(4)
                         }
                     } label: {
-                        Text("Warning").tag(3)
-                        if displayTypes.contains(3) {
+                        Text("Warning").tag(4)
+                        if displayTypes.contains(4) {
                             Image(systemName: "checkmark")
                         }
                     }
