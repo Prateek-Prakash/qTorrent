@@ -23,7 +23,7 @@ struct AuthPrefsView: View {
                 }
                 
                 Section(header: Text("REMOTE CREDENTIALS")) {
-                    TextField("Remmote Username", text: $remoteUsername)
+                    TextField("Remote Username", text: $remoteUsername)
                         .modifier(TextFieldClearModifier(text: $remoteUsername))
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
